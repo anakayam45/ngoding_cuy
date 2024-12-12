@@ -9,12 +9,14 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, LearnPage.routeName);
               },
-              child: const Text("klik untuk pergi ke testPage"))
+              child: const Text("klik untuk pergi ke learn page"))
         ],
       ),
     );
