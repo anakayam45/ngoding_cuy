@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/pages/learn.dart';
 import 'package:ngoding_cuy/pages/list.dart';
-import 'package:ngoding_cuy/pages/test.dart';
 
 import '../widgets/platform.dart';
 import 'profile.dart';
@@ -17,15 +17,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _pageIndex = 0;
+  int pageIndex = 0;
 
-  final List<Widget> _pages = [
+  final List<Widget> pages = [
     const ListPage(),
-    const TestPage(),
+    const LearnPage(),
     const ProfilePage(),
   ];
 
-  final List<BottomNavigationBarItem> _pageIcon = [
+  final List<BottomNavigationBarItem> pageIcon = [
     BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
         label: "Home"),
@@ -38,30 +38,35 @@ class _HomePageState extends State<HomePage> {
         label: "profile"),
   ];
 
-  void _onClick(int index) {
+  void onClick(int index) {
     setState(() {
-      _pageIndex = index;
+      pageIndex = index;
     });
   }
 
-  Widget _buildIos(BuildContext context) {
+  Widget buildIos(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        items: _pageIcon,
+        items: pageIcon,
       ),
       tabBuilder: (BuildContext context, int index) {
-        return _pages[index];
+        return pages[index];
       },
     );
   }
 
-  Widget _buildAndro(BuildContext context) {
+  Widget buildAndro(BuildContext context) {
     return Scaffold(
-      body: _pages[_pageIndex],
+      backgroundColor: const Color.fromARGB(255, 190, 195, 196),
+      appBar: AppBar(
+        title: const Text("data"),
+      ),
+      body:
+          SafeArea(minimum: const EdgeInsets.all(10), child: pages[pageIndex]),
       bottomNavigationBar: BottomNavigationBar(
-        items: _pageIcon,
-        onTap: _onClick,
-        currentIndex: _pageIndex,
+        items: pageIcon,
+        onTap: onClick,
+        currentIndex: pageIndex,
       ),
     );
   }
@@ -69,8 +74,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return PlatformWidget(
-      androidBuilder: _buildAndro,
-      iosBuilder: _buildIos,
+      androidBuilder: buildAndro,
+      iosBuilder: buildIos,
     );
   }
 }
