@@ -1,5 +1,4 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:ngoding_cuy/main.dart';
 
 class MyNotification {
   static MyNotification? _instance;
@@ -32,10 +31,11 @@ class MyNotification {
     );
   }
 
-  Future<void> showNotification() async {
+  Future<void> showNotification(
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
-      'channel_id', // ID unik untuk channel
+      '0',
       'channel_name', // Nama channel
       channelDescription: 'Deskripsi channel',
       importance: Importance.max,

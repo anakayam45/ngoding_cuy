@@ -1,35 +1,34 @@
-// import 'dart:ui';
-// import 'dart:isolate';
-// import '../main.dart';
+import 'dart:isolate';
+import 'dart:ui';
 
-// final ReceivePort port = ReceivePort();
+import 'package:ngoding_cuy/main.dart';
+import 'package:ngoding_cuy/utils/notification.dart';
 
-// class BackgroundService {
-//   static BackgroundService? _instance;
-//   static const String _isolateName = 'isolate';
-//   static SendPort? _uiSendPort;
+final ReceivePort port = ReceivePort();
 
-//   BackgroundService._internal() {
-//     _instance = this;
-//   }
+class BackgroundService {
+  static BackgroundService? _instance;
+  static const String _isolateName = 'isolate';
+  static SendPort? _uiSendPort;
 
-//   factory BackgroundService() => _instance ?? BackgroundService._internal();
+  BackgroundService._internal() {
+    _instance = this;
+  }
 
-//   void initializeIsolate() {
-//     IsolateNameServer.registerPortWithName(
-//       port.sendPort,
-//       _isolateName,
-//     );
-//   }
+  factory BackgroundService() => _instance ?? BackgroundService._internal();
+  void initializeIsolate() {
+    IsolateNameServer.registerPortWithName(
+      port.sendPort,
+      _isolateName,
+    );
+  }
 
-//   static Future<void> callback() async {
-//     print('Alarm fired!');
-//     final NotificationHelper notificationHelper = NotificationHelper();
-//     var result = await ApiService().topHeadlines();
-//     await notificationHelper.showNotification(
-//         flutterLocalNotificationsPlugin, result);
+  static Future<void> callback() async {
+    print('Alarm fired!');
+    final MyNotification notificationHelper = MyNotification();
+    await notificationHelper.showNotification(flutterLocalNotificationsPlugin);
 
-//     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
-//     _uiSendPort?.send(null);
-//   }
-// }
+    _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
+    _uiSendPort?.send(null);
+  }
+}

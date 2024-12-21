@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/common/style.dart';
-import 'package:ngoding_cuy/provider/datetime_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:ngoding_cuy/widgets/time_picker.dart';
 
 import '../utils/notification.dart';
 
@@ -15,8 +13,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final MyNotification myNotification = MyNotification();
-
-  bool notification = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,35 +45,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 child: Padding(
                     padding: const EdgeInsets.all(10.0),
-                    child: ListView(children: [
-                      // notifikasi
-                      Consumer<TimeProvider>(
-                          builder: (context, provider, child) {
-                        return ListTile(
-                            title: const Text('Notifikasi', style: bodyLine),
-                            trailing: Switch.adaptive(
-                              value: notification,
-                              onChanged: (value) async {
-                                setState(() {
-                                  notification != value;
-                                });
-                                if (value) {
-                                  TimeOfDay selectedTime = TimeOfDay.now();
-                                  final TimeOfDay? pickedTime =
-                                      await showTimePicker(
-                                    context: context,
-                                    initialTime: selectedTime,
-                                    helpText: "Kapan Pengingat belajar muncul",
-                                    initialEntryMode: TimePickerEntryMode.input,
-                                  );
-                                  if (pickedTime != null &&
-                                      pickedTime != selectedTime) {
-                                    provider.setSelectedTime(pickedTime);
-                                  }
-                                }
-                              },
-                            ));
-                      })
+                    child: ListView(children: const [
+                      MyTimePicker(),
                     ])),
               ),
             ),

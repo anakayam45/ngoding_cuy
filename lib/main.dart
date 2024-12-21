@@ -1,9 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:ngoding_cuy/pages/home.dart';
 import 'package:ngoding_cuy/pages/learn.dart';
 import 'package:ngoding_cuy/pages/profile.dart';
 import 'package:ngoding_cuy/pages/test.dart';
+import 'package:ngoding_cuy/provider/scheduled_provider.dart';
+import 'package:ngoding_cuy/utils/background_service.dart';
 import 'package:ngoding_cuy/utils/notification.dart';
 import 'pages/list.dart';
 import 'provider/datetime_provider.dart';
@@ -17,10 +22,19 @@ void main() async {
 
   final MyNotification myNotification = MyNotification();
   myNotification.initializeNotifications(flutterLocalNotificationsPlugin);
+
+  final BackgroundService service = BackgroundService();
+  service.initializeIsolate();
+
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TimeProvider()),
+        ChangeNotifierProvider(create: (_) => SchedulingProvider())
       ],
       child: const MyApp(),
     ),
