@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/common/style.dart';
 
 class MyCatalog extends StatelessWidget {
   const MyCatalog({super.key});
@@ -24,10 +25,7 @@ class MyCatalog extends StatelessWidget {
               const Positioned(
                 bottom: 10,
                 left: 10,
-                child: Text(
-                  "Judul Berita",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
+                child: Text("Judul Berita", style: headLine),
               ),
             ],
           ),

@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/common/style.dart';
+import 'package:ngoding_cuy/provider/datetime_provider.dart';
+import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../utils/notification.dart';
+
+class ProfilePage extends StatefulWidget {
   static const routeName = "profile";
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final MyNotification myNotification = MyNotification();
+
+  bool notification = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +42,43 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 50),
-          // Mode Gelap dan Switch
           Flexible(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListView.builder(
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return const ListTile(
-                        title: Text(
-                          'mode gelap',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListView(children: [
+                      // notifikasi
+                      Consumer<TimeProvider>(
+                          builder: (context, provider, child) {
+                        return ListTile(
+                            title: const Text('Notifikasi', style: bodyLine),
+                            trailing: Switch.adaptive(
+                              value: notification,
+                              onChanged: (value) async {
+                                setState(() {
+                                  notification != value;
+                                });
+                                if (value) {
+                                  TimeOfDay selectedTime = TimeOfDay.now();
+                                  final TimeOfDay? pickedTime =
+                                      await showTimePicker(
+                                    context: context,
+                                    initialTime: selectedTime,
+                                    helpText: "Kapan Pengingat belajar muncul",
+                                    initialEntryMode: TimePickerEntryMode.input,
+                                  );
+                                  if (pickedTime != null &&
+                                      pickedTime != selectedTime) {
+                                    provider.setSelectedTime(pickedTime);
+                                  }
+                                }
+                              },
+                            ));
+                      })
+                    ])),
               ),
             ),
           )

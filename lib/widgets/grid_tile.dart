@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/common/style.dart';
 import 'package:ngoding_cuy/pages/test.dart';
 
 class MyGridTile extends StatelessWidget {
@@ -11,7 +12,10 @@ class MyGridTile extends StatelessWidget {
       child: GridTile(
         footer: const Padding(
           padding: EdgeInsets.all(8.0),
-          child: Text("Hello world"),
+          child: Text(
+            "Hello world",
+            style: headLine,
+          ),
         ),
         header: ClipRRect(
           borderRadius: BorderRadius.circular(10),
