@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/common/style.dart';
 
-class MyCatalog extends StatelessWidget {
-  const MyCatalog({super.key});
+class MyNewsCatalog extends StatelessWidget {
+  const MyNewsCatalog({super.key});
 
   @override
   Widget build(BuildContext context) {

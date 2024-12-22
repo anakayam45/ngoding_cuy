@@ -3,29 +3,31 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/pages/learn.dart';
-import 'package:ngoding_cuy/pages/list.dart';
+import 'package:ngoding_cuy/pages/home_page.dart';
 
-import '../widgets/platform.dart';
+import '../utils/platform.dart';
 import 'profile.dart';
 
-class HomePage extends StatefulWidget {
+class StartPage extends StatefulWidget {
   static const routeName = "/";
-  const HomePage({super.key});
+  const StartPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<StartPage> createState() => _StartPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _StartPageState extends State<StartPage> {
   int pageIndex = 0;
 
   final List<Widget> pages = [
-    const ListPage(),
+    // layar yang digunakan
+    const HomePage(),
     const LearnPage(),
     const ProfilePage(),
   ];
 
   final List<BottomNavigationBarItem> pageIcon = [
+    // item di Navbar di bawah layar
     BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
         label: "Home"),
@@ -39,12 +41,14 @@ class _HomePageState extends State<HomePage> {
   ];
 
   void onClick(int index) {
+    // action untuk memindahkan layar
     setState(() {
       pageIndex = index;
     });
   }
 
   Widget buildIos(BuildContext context) {
+    // layar untuk IOS
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: pageIcon,
@@ -56,13 +60,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildAndro(BuildContext context) {
+    // layar untuk Android
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 190, 195, 196),
-      appBar: AppBar(
-        title: const Text("data"),
-      ),
-      body:
-          SafeArea(minimum: const EdgeInsets.all(10), child: pages[pageIndex]),
+      body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: pageIcon,
         onTap: onClick,
@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // klasifikasi perangkat android atau ios
     return PlatformWidget(
       androidBuilder: buildAndro,
       iosBuilder: buildIos,

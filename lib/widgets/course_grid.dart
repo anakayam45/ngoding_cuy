@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/common/style.dart';
-import 'package:ngoding_cuy/pages/test.dart';
+import 'package:ngoding_cuy/widgets/popup.dart';
 
-class MyGridTile extends StatelessWidget {
-  const MyGridTile({super.key});
+class MyCourse extends StatelessWidget {
+  const MyCourse({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, TestPage.routeName),
+      onTap: () {
+        showDialog(context: context, builder: (context) => const MyPopUp());
+      },
       child: GridTile(
         footer: const Padding(
           padding: EdgeInsets.all(8.0),

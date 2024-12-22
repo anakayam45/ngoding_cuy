@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/widgets/my_scaffold.dart';
 
 class TestPage extends StatefulWidget {
   static const routeName = "/test";
@@ -12,8 +13,8 @@ class _TestPageState extends State<TestPage> {
   String? jawaban;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
+    return MyScaffold(
+      title: "Soal",
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

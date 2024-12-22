@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/widgets/my_scaffold.dart';
 
 class LearnPage extends StatefulWidget {
   static const routeName = "/learn";
@@ -12,9 +13,9 @@ class _LearnPageState extends State<LearnPage> {
   int i = 1;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      minimum: const EdgeInsets.all(10),
-      child: Stack(children: [
+    return MyScaffold(
+      title: "Belajar bang",
+      body: Stack(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -50,13 +51,3 @@ class _LearnPageState extends State<LearnPage> {
     );
   }
 }
-
-// Scaffold(
-//       backgroundColor: const Color.fromARGB(255, 190, 195, 196),
-//       appBar: AppBar(
-//         title: const Text("data"),
-//       ),
-//       body:
-//           SafeArea(minimum: const EdgeInsets.all(10), child: pages[pageIndex]),
-//       ),
-//     );
