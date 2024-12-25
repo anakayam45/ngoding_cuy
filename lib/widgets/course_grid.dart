@@ -22,15 +22,12 @@ class MyCourse extends StatelessWidget {
         header: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Container(
-            color: Colors.white,
-            height: 70,
-            child: const Center(
-              child: Icon(
-                Icons.image,
-                size: 50,
-              ),
-            ),
-          ),
+              color: Colors.white,
+              height: 70,
+              child: Image.asset(
+                "lib/images/img01.png",
+                fit: BoxFit.cover,
+              )),
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),

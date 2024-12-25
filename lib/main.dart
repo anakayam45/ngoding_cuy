@@ -7,6 +7,7 @@ import 'package:ngoding_cuy/pages/start_page.dart';
 import 'package:ngoding_cuy/pages/learn.dart';
 import 'package:ngoding_cuy/pages/profile.dart';
 import 'package:ngoding_cuy/pages/test.dart';
+import 'package:ngoding_cuy/provider/course_provider.dart';
 import 'package:ngoding_cuy/provider/scheduled_provider.dart';
 import 'package:ngoding_cuy/utils/background_service.dart';
 import 'package:ngoding_cuy/utils/notification.dart';
@@ -37,7 +38,8 @@ void main() async {
       // menggunakan multiprovider
       providers: [
         ChangeNotifierProvider(create: (_) => TimeProvider()),
-        ChangeNotifierProvider(create: (_) => SchedulingProvider())
+        ChangeNotifierProvider(create: (_) => SchedulingProvider()),
+        ChangeNotifierProvider(create: (_) => CourseProvider())
       ],
       child: const MyApp(),
     ),
