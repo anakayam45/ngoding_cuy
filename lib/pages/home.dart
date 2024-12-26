@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ngoding_cuy/widgets/course_grid_tile.dart';
 import 'package:ngoding_cuy/widgets/custom_scaffold.dart';
-import 'package:ngoding_cuy/widgets/news_list.dart';
+import 'package:ngoding_cuy/widgets/news_list_tile.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
