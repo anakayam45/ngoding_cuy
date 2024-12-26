@@ -12,9 +12,8 @@ class MyCourse extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: const Border.symmetric(
-                vertical: BorderSide(color: Colors.black12))),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.white, width: 2)),
         child: GridTile(
           footer: const Padding(
             padding: EdgeInsets.all(8.0),
@@ -25,12 +24,15 @@ class MyCourse extends StatelessWidget {
           header: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
-                color: Colors.white,
+                color: const Color(0xFFBEC3C4),
                 height: 70,
-                child: Image.asset(
-                  "lib/images/img01.png",
-                  fit: BoxFit.cover,
-                )),
+                child: Image.asset("lib/images/img01.png", fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child:
+                        Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                  );
+                })),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),

@@ -18,7 +18,7 @@ class MyScaffold extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        backgroundColor: const Color.fromARGB(255, 190, 195, 196),
+        backgroundColor: const Color(0xFFBEC3C4),
         body: SafeArea(
           minimum: const EdgeInsets.all(10),
           child: body,

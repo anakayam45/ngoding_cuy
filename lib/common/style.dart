@@ -26,7 +26,7 @@ class MyAppTheme {
       headlineLarge: GoogleFonts.montserrat(
         fontSize: 18,
         fontWeight: FontWeight.w700,
-        letterSpacing: 1.1,
+        letterSpacing: 1.2,
         color: const Color(0xFFE1F1F2),
       ),
       headlineMedium: const TextStyle(
@@ -38,8 +38,8 @@ class MyAppTheme {
       //  headlineSmall
       //
       headlineSmall: GoogleFonts.openSans(
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
         color: const Color.fromARGB(255, 255, 255, 32),
       ),
       titleLarge: const TextStyle(
