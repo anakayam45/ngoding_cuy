@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:ngoding_cuy/data/model/materi.dart';
+// import 'package:provider/provider.dart';
 
 class MyPopUp extends StatelessWidget {
   const MyPopUp({super.key});
@@ -56,6 +58,7 @@ class MyPopUp extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
+                // final course = Provider.of<NgodingCuy>(context).;
               },
               child: const Text("Pilih"),
             ),

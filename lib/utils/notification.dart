@@ -36,7 +36,7 @@ class MyNotification {
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
       '0',
-      'channel_name', // Nama channel
+      'channel_name',
       channelDescription: 'Deskripsi channel',
       importance: Importance.max,
       priority: Priority.high,
@@ -51,11 +51,11 @@ class MyNotification {
     );
 
     await flutterLocalNotificationsPlugin.show(
-      0, // ID notifikasi
-      'Judul Notifikasi', // Judul
-      'Isi Notifikasi', // Isi
+      0,
+      'Judul Notifikasi',
+      'Isi Notifikasi',
       platformDetails,
-      payload: 'Data tambahan', // Data payload (opsional)
+      payload: 'Data tambahan',
     );
   }
 }

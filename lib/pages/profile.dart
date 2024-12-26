@@ -24,14 +24,12 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Avatar
               const CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.white,
                 child: Icon(Icons.person, size: 50, color: Colors.grey),
               ),
               const SizedBox(height: 10),
-              // Username
               const Text(
                 'Username',
                 style: TextStyle(

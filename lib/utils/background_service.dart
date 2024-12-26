@@ -1,8 +1,9 @@
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:ngoding_cuy/main.dart';
-import 'package:ngoding_cuy/utils/notification.dart';
+import 'notification.dart';
+
+import '../main.dart';
 
 final ReceivePort port = ReceivePort();
 

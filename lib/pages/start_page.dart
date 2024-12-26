@@ -22,14 +22,12 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
   final List<Widget> pages = [
-    // layar yang digunakan
     const HomePage(),
     const LearnPage(),
     const ProfilePage(),
   ];
 
   final List<BottomNavigationBarItem> pageIcon = [
-    // item di Navbar di bawah layar
     BottomNavigationBarItem(
         icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
         label: "Home"),
@@ -44,14 +42,12 @@ class _StartPageState extends State<StartPage> {
 
   int pageIndex = 0;
   void onClick(int index) {
-    // action untuk memindahkan layar
     setState(() {
       pageIndex = index;
     });
   }
 
   Widget buildIos(BuildContext context) {
-    // untuk perangkat IOS
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         items: pageIcon,
@@ -63,7 +59,6 @@ class _StartPageState extends State<StartPage> {
   }
 
   Widget buildAndro(BuildContext context) {
-    // untuk perangkat android
     return Scaffold(
       body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -74,14 +69,12 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  late final Future<NgodingCuy>
-      _ngoding; // variabel tempat data aplikai disimpan
+  late final Future<NgodingCuy> _ngoding;
 
   @override
   void initState() {
     super.initState();
-    _ngoding = ApiService()
-        .availableCourse(); // memuat data aplikasi ketika aplikasi pertama kali dimuat
+    _ngoding = ApiService().availableCourse();
   }
 
   @override
@@ -90,38 +83,27 @@ class _StartPageState extends State<StartPage> {
       future: _ngoding,
       builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
         var state = snapshot.connectionState;
-        //
-        //
+
         if (state != ConnectionState.done) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-          //
-          //
         } else if (snapshot.hasError) {
           return Center(
             child: Material(
               child: Text(snapshot.error.toString()),
             ),
           );
-          //
-          //
         } else if (snapshot.hasData && snapshot.data != null) {
-          //  memastikan perubahan state seperti Provider.addCourse()
-          //  dilakukan setelah render selesai, untuk menghindari konflik atau rebuild tak terkendali.
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Provider.of<CourseProvider>(context, listen: false)
                 .addCourse(snapshot.data!);
           });
-          //
-          //  render widget dimulai
-          //
+
           return PlatformWidget(
             androidBuilder: buildAndro,
             iosBuilder: buildIos,
           );
-          //
-          //
         } else {
           return const Center(
             child: Text("Tidak ada data tersedia."),

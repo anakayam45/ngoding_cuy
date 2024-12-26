@@ -1,4 +1,5 @@
 class NgodingCuy {
+  String? username;
   int status;
   CourseData data;
 
@@ -30,6 +31,7 @@ class CourseData {
 }
 
 class CourseName {
+  bool selected = false;
   String id;
   String name;
   String image;
@@ -63,6 +65,9 @@ class CourseName {
 }
 
 class Module {
+  bool selected = false;
+  bool isdone = false;
+
   String id;
   String title;
   String description;

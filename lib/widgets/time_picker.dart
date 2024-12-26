@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/provider/scheduled_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../common/style.dart';
 import '../provider/datetime_provider.dart';
 
 class MyTimePicker extends StatefulWidget {
@@ -17,7 +16,7 @@ class _MyTimePickerState extends State<MyTimePicker> {
   Widget build(BuildContext context) {
     return Consumer<TimeProvider>(builder: (context, provider, child) {
       return ListTile(
-          title: const Text('Notifikasi', style: bodyLine),
+          title: const Text('Notifikasi'),
           trailing:
               Consumer<SchedulingProvider>(builder: (context, schedule, _) {
             return Switch.adaptive(

@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/common/style.dart';
+
 import 'package:ngoding_cuy/widgets/course_grid.dart';
 import 'package:ngoding_cuy/widgets/my_scaffold.dart';
 import 'package:ngoding_cuy/widgets/news_list.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const routeName = "/home";
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MyScaffold(
@@ -16,29 +21,23 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // item 1
               SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return const MyNewsCatalog(); // widget untuk berita developer atau pemberitahuan sistem
+                    return const MyNewsCatalog();
                   },
                   itemCount: 3,
                 ),
               ),
-
-              // item 2
               const Padding(
                 padding: EdgeInsets.all(8),
                 child: Text(
                   "Latihan",
-                  style: headLine,
                 ),
               ),
-
-              // item 3
               GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -49,7 +48,7 @@ class HomePage extends StatelessWidget {
                     mainAxisExtent: 150),
                 itemCount: 9,
                 itemBuilder: (BuildContext context, int index) {
-                  return const MyCourse(); // grid menu course
+                  return const MyCourse();
                 },
               ),
             ],

@@ -9,10 +9,10 @@ class Paragraph extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontFamily: 'Roboto', // Font yang modern dan mudah dibaca
-        fontSize: 14.0, // Ukuran teks moderat
-        color: Colors.grey[800], // Warna gelap abu-abu seperti komentar
-        height: 1.5, // Memberikan jarak baris yang nyaman
+        fontFamily: 'Roboto',
+        fontSize: 14.0,
+        color: Colors.grey[800],
+        height: 1.5,
       ),
     );
   }
