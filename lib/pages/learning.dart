@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/widgets/my_scaffold.dart';
+import 'package:ngoding_cuy/widgets/custom_scaffold.dart';
 
 class LearnPage extends StatefulWidget {
   static const routeName = "/learn";

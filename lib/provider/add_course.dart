@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/model/materi.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 
 class CourseProvider extends ChangeNotifier {
   NgodingCuy? _course;

@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/api/api.dart';
-import 'package:ngoding_cuy/data/model/materi.dart';
-import 'package:ngoding_cuy/pages/learn.dart';
-import 'package:ngoding_cuy/pages/home_page.dart';
-import 'package:ngoding_cuy/provider/course_provider.dart';
+import 'package:ngoding_cuy/data/api/service.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
+import 'package:ngoding_cuy/pages/learning.dart';
+import 'package:ngoding_cuy/pages/home.dart';
+import 'package:ngoding_cuy/provider/add_course.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/platform.dart';
+import '../utils/platform_case.dart';
 import 'profile.dart';
 
 class StartPage extends StatefulWidget {

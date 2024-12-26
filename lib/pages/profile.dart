@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/widgets/my_scaffold.dart';
+import 'package:ngoding_cuy/widgets/custom_scaffold.dart';
 import 'package:ngoding_cuy/widgets/time_picker.dart';
 
-import '../utils/notification.dart';
+import '../utils/notification_settings.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = "profile";

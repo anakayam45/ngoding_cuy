@@ -6,10 +6,10 @@ import '../main.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/background_service.dart';
-import '../utils/notification.dart';
-import 'course_provider.dart';
-import 'datetime_provider.dart';
-import 'scheduled_provider.dart';
+import '../utils/notification_settings.dart';
+import 'add_course.dart';
+import 'set_selected_time.dart';
+import 'scheduling_background_task.dart';
 
 void mainProvider(main) async {
   WidgetsFlutterBinding.ensureInitialized();

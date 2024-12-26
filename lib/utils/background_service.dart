@@ -1,7 +1,7 @@
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'notification.dart';
+import 'notification_settings.dart';
 
 import '../main.dart';
 

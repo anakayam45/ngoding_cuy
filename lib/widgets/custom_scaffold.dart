@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/common/style.dart';
+import 'package:ngoding_cuy/common/my_theme_app.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget body;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'pages/start_page.dart';
-import 'pages/learn.dart';
+import 'pages/starting.dart';
+import 'pages/learning.dart';
 import 'pages/profile.dart';
-import 'pages/test.dart';
-import 'pages/home_page.dart';
-import 'provider/main_provider.dart';
+import 'pages/question.dart';
+import 'pages/home.dart';
+import 'provider/center_provider_config.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/widgets/popup.dart';
+import 'package:ngoding_cuy/widgets/popup_alert_dialog.dart';
 
 class MyCourse extends StatelessWidget {
   const MyCourse({super.key});

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ngoding_cuy/data/model/materi.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 
 class ApiService {
   static const String _domain = "http://10.0.2.2:8080";
