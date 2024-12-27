@@ -27,18 +27,29 @@ class _StartPageState extends State<StartPage> {
     const ProfilePage(),
   ];
 
-  final List<BottomNavigationBarItem> pageIcon = [
-    BottomNavigationBarItem(
-        icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
-        label: "Home"),
-    BottomNavigationBarItem(
-        icon: Icon(Platform.isIOS ? CupertinoIcons.quote_bubble : Icons.task),
-        label: "Task"),
-    BottomNavigationBarItem(
-        icon: Icon(
-            Platform.isIOS ? CupertinoIcons.profile_circled : Icons.person),
-        label: "profile"),
-  ];
+  final Map<String, Icon> pageIcons = {
+    'Home': Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
+    'Learn': Icon(Platform.isIOS ? CupertinoIcons.quote_bubble : Icons.task),
+    'Profile':
+        Icon(Platform.isIOS ? CupertinoIcons.profile_circled : Icons.person),
+  };
+
+  late List<BottomNavigationBarItem> pageIcon;
+  late final Future<NgodingCuy> ngoding;
+
+  @override
+  void initState() {
+    super.initState();
+    ngoding = ApiService().availableCourse();
+    pageIcon = pageIcons.entries
+        .map(
+          (entry) => BottomNavigationBarItem(
+            icon: entry.value,
+            label: entry.key,
+          ),
+        )
+        .toList();
+  }
 
   int pageIndex = 0;
   void onClick(int index) {
@@ -49,9 +60,7 @@ class _StartPageState extends State<StartPage> {
 
   Widget buildIos(BuildContext context) {
     return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        items: pageIcon,
-      ),
+      tabBar: CupertinoTabBar(items: pageIcon),
       tabBuilder: (BuildContext context, int index) {
         return pages[index];
       },
@@ -69,18 +78,10 @@ class _StartPageState extends State<StartPage> {
     );
   }
 
-  late final Future<NgodingCuy> _ngoding;
-
-  @override
-  void initState() {
-    super.initState();
-    _ngoding = ApiService().availableCourse();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<NgodingCuy>(
-      future: _ngoding,
+      future: ngoding,
       builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
         var state = snapshot.connectionState;
 

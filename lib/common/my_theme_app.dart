@@ -21,36 +21,39 @@ class MyAppTheme {
         color: Colors.white54,
       ),
       //
-      //  headlineLarge
+      //  headline
       //
-      headlineLarge: GoogleFonts.montserrat(
+      // style => news title
+      headlineLarge: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w700,
         letterSpacing: 1.2,
-        color: const Color(0xFFE1F1F2),
+        color: Color(0xFFE1F1F2),
       ),
       headlineMedium: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w600,
         color: Colors.white70,
       ),
-      //
-      //  headlineSmall
-      //
-      headlineSmall: GoogleFonts.openSans(
+      // style => news sub title
+      headlineSmall: const TextStyle(
         fontSize: 10,
         fontWeight: FontWeight.w400,
-        color: const Color.fromARGB(255, 255, 255, 32),
+        color: Color.fromARGB(255, 255, 255, 32),
       ),
+      //
+      //  title
+      //
+      // style => course name title
       titleLarge: const TextStyle(
         fontSize: 22,
         fontWeight: FontWeight.w700,
-        color: Colors.white,
+        color: Color.fromARGB(255, 0, 0, 0),
       ),
-      titleMedium: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: Colors.white70,
+      titleMedium: GoogleFonts.raleway(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: const Color.fromARGB(255, 0, 0, 0),
       ),
       titleSmall: const TextStyle(
         fontSize: 16,

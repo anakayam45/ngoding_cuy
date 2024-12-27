@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 
 class MyNewsCatalog extends StatelessWidget {
-  const MyNewsCatalog({super.key});
+  final News news;
+  const MyNewsCatalog({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
         child: Stack(
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width - 50,
-              child: Image.asset(
-                "lib/images/freya1.jpg",
+              child: Image.network(
+                news.image,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const Center(
@@ -27,14 +29,6 @@ class MyNewsCatalog extends StatelessWidget {
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 14, 178, 200)
-                          .withOpacity(0.1),
-                      offset: const Offset(5, 5),
-                      blurRadius: 8,
-                    ),
-                  ],
                   gradient: LinearGradient(
                       colors: [
                         Colors.transparent,
@@ -54,10 +48,12 @@ class MyNewsCatalog extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Judul Berita",
+                      Text(news.title,
                           style: Theme.of(context).textTheme.headlineLarge),
                       Text(
-                        "Lorem impsum dolor sit amet .....",
+                        news.description,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headlineSmall,
                       )
                     ],

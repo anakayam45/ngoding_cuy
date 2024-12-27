@@ -10,4 +10,18 @@ class CourseProvider extends ChangeNotifier {
     _course = json;
     notifyListeners();
   }
+
+  List<CourseName> getCourseData() {
+    if (_course != null) {
+      return _course!.data.courses;
+    }
+    return [];
+  }
+
+  List<News> getNewsData() {
+    if (_course != null) {
+      return _course!.data.news;
+    }
+    return [];
+  }
 }
