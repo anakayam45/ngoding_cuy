@@ -1,6 +1,8 @@
 import 'dart:isolate';
 import 'dart:ui';
+import 'dart:io';
 
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'notification_settings.dart';
 
 import '../main.dart';
@@ -17,11 +19,14 @@ class BackgroundService {
   }
 
   factory BackgroundService() => _instance ?? BackgroundService._internal();
-  void initializeIsolate() {
+  void initializeIsolate() async {
     IsolateNameServer.registerPortWithName(
       port.sendPort,
       _isolateName,
     );
+    if (Platform.isAndroid) {
+      await AndroidAlarmManager.initialize();
+    }
   }
 
   static Future<void> callback() async {

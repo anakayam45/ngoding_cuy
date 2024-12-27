@@ -6,11 +6,13 @@ import 'pages/profile.dart';
 import 'pages/question.dart';
 import 'pages/home.dart';
 import 'provider/center_provider_config.dart';
+import 'utils/init.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 void main() async {
+  initBackgroundAndNotification();
   mainProvider(const MyApp());
 }
 

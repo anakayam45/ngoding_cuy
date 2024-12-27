@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/api/service.dart';
+import 'package:ngoding_cuy/data/api/service_api.dart';
 import 'package:ngoding_cuy/data/model/materi_from_api.dart';
-import 'package:ngoding_cuy/pages/learning.dart';
 import 'package:ngoding_cuy/pages/home.dart';
-import 'package:ngoding_cuy/provider/add_course.dart';
+import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/platform_case.dart';
 import 'profile.dart';
+import 'selection_course.dart';
 
 class StartPage extends StatefulWidget {
   static const routeName = "/";
@@ -23,32 +23,29 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   final List<Widget> pages = [
     const HomePage(),
-    const LearnPage(),
+    const CoursePage(),
     const ProfilePage(),
   ];
 
-  final Map<String, Icon> pageIcons = {
-    'Home': Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
-    'Learn': Icon(Platform.isIOS ? CupertinoIcons.quote_bubble : Icons.task),
-    'Profile':
-        Icon(Platform.isIOS ? CupertinoIcons.profile_circled : Icons.person),
-  };
+  final List<BottomNavigationBarItem> pageIcon = [
+    BottomNavigationBarItem(
+        icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.home),
+        label: "Home"),
+    BottomNavigationBarItem(
+        icon: Icon(Platform.isIOS ? CupertinoIcons.quote_bubble : Icons.task),
+        label: "Task"),
+    BottomNavigationBarItem(
+        icon: Icon(
+            Platform.isIOS ? CupertinoIcons.profile_circled : Icons.person),
+        label: "Profile"),
+  ];
 
-  late List<BottomNavigationBarItem> pageIcon;
   late final Future<NgodingCuy> ngoding;
 
   @override
   void initState() {
     super.initState();
     ngoding = ApiService().availableCourse();
-    pageIcon = pageIcons.entries
-        .map(
-          (entry) => BottomNavigationBarItem(
-            icon: entry.value,
-            label: entry.key,
-          ),
-        )
-        .toList();
   }
 
   int pageIndex = 0;

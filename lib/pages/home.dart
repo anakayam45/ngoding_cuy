@@ -6,7 +6,7 @@ import 'package:ngoding_cuy/widgets/news_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../data/model/materi_from_api.dart';
-import '../provider/add_course.dart';
+import '../provider/course_activity.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";

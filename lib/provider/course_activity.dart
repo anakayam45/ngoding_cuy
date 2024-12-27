@@ -24,4 +24,22 @@ class CourseProvider extends ChangeNotifier {
     }
     return [];
   }
+
+  List<CourseName> getSelectedCourse() {
+    if (_course != null) {
+      return _course!.data.courses.where((x) => x.selected).toList();
+    }
+    return [];
+  }
+
+  void selectingCourse(String id) {
+    if (_course != null) {
+      for (var course in _course!.data.courses) {
+        if (course.id == id) {
+          course.selected = true;
+        }
+      }
+      notifyListeners();
+    }
+  }
 }

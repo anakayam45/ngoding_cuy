@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-// import 'package:ngoding_cuy/data/model/materi.dart';
-// import 'package:provider/provider.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
+import 'package:ngoding_cuy/provider/course_activity.dart';
+import 'package:provider/provider.dart';
 
 class MyPopUp extends StatelessWidget {
-  const MyPopUp({super.key});
+  final CourseName course;
+  const MyPopUp({super.key, required this.course});
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
       content: SizedBox(
-        height:
-            MediaQuery.of(context).size.height * 0.4, // 40% dari tinggi layar
+        height: MediaQuery.of(context).size.height * 0.4,
         child: Column(
           children: [
             Flexible(
@@ -19,26 +20,32 @@ class MyPopUp extends StatelessWidget {
               child: ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(25)),
-                child: Image.asset("lib/images/img01.png",
+                child: Image.network(course.image,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width),
               ),
             ),
-            const Flexible(
+            Flexible(
               flex: 3,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Text(
-                      "Ini Judul",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      course.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(
+                              fontWeight: FontWeight.w600, color: Colors.blue),
                     ),
-                    SizedBox(height: 8), // Spasi antara judul dan deskripsi
+                    const SizedBox(
+                        height: 8), // Spasi antara judul dan deskripsi
                     Text(
-                      "Deskripsi",
+                      course.description,
                       textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w600, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -57,8 +64,10 @@ class MyPopUp extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
+                Provider.of<CourseProvider>(context, listen: false)
+                    .selectingCourse(course.id);
+                print("from Pop up => ${course.id}");
                 Navigator.pop(context);
-                // final course = Provider.of<NgodingCuy>(context).;
               },
               child: const Text("Pilih"),
             ),

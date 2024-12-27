@@ -19,7 +19,7 @@ class SchedulingProvider extends ChangeNotifier {
 
       // Menjadwalkan alarm dengan waktu yang diambil dari TimeOfDay
       return await AndroidAlarmManager.periodic(
-        const Duration(minutes: 1),
+        const Duration(days: 1),
         alarmID,
         BackgroundService.callback,
         startAt: DateTimeHelper.format(specifiedTime),

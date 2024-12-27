@@ -11,7 +11,11 @@ class MyCourse extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(context: context, builder: (context) => const MyPopUp());
+        showDialog(
+            context: context,
+            builder: (context) => MyPopUp(
+                  course: course,
+                ));
       },
       child: Container(
         margin: const EdgeInsets.all(8.0), // Jarak antar item di grid
@@ -69,23 +73,37 @@ class MyCourse extends StatelessWidget {
                         ),
                   ),
                 ),
-                Positioned(
-                  bottom: 10,
-                  right: 10,
-                  child: Text(
-                    course.duration,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
-                          color: Colors.grey[600],
-                        ),
-                  ),
-                ),
+                TextDuration(course: course),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TextDuration extends StatelessWidget {
+  const TextDuration({
+    super.key,
+    required this.course,
+  });
+
+  final CourseName course;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 10,
+      right: 10,
+      child: Text(
+        course.duration,
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
       ),
     );
   }
