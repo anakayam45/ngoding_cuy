@@ -9,21 +9,21 @@ import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/platform_case.dart';
-import 'profile.dart';
+import 'profile_setting.dart';
 import 'selection_course.dart';
 
-class StartPage extends StatefulWidget {
+class LandingPage extends StatefulWidget {
   static const routeName = "/";
-  const StartPage({super.key});
+  const LandingPage({super.key});
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  State<LandingPage> createState() => _LandingPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _LandingPageState extends State<LandingPage> {
   final List<Widget> pages = [
     const HomePage(),
-    const CoursePage(),
+    const SelectedCoursePage(),
     const ProfilePage(),
   ];
 

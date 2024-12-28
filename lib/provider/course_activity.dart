@@ -3,99 +3,101 @@ import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 
 class CourseAppActifity extends ChangeNotifier {
   // model dasar > status, data
-  NgodingCuy? _course;
-  NgodingCuy? get course => _course;
+  NgodingCuy? courseData;
+  NgodingCuy? get course => courseData;
   void addCourse(json) {
-    _course = json;
+    courseData = json;
     notifyListeners();
-  } // menambahkan data dari service_api.dart
-
-//
+  } // nilainya model Ngodingcuy
+  // menambahkan data dari service_api.dart
 
 //
 
   // digunakan di popup_alert_dialog.dart
-  // berfungsi untuk menyimpan course yang di pilih
-  void setSelectingCourse(String id) {
-    if (_course != null) {
-      for (var course in _course!.data.courses) {
+  void upDateSelectingCourseData(String id) {
+    if (courseData != null) {
+      for (var course in courseData!.data.courses) {
         if (course.id == id) {
           course.selected = true;
         }
       }
       notifyListeners();
     }
-  }
-
-//
+  } // mengubah nilai selected nya jadi true
 
 //
 
   // digunakan di selection_page.dart
-  // outpunya list materi yang sudah dipilih
-  List<CourseName> getSelectedCourse() {
-    if (_course != null) {
-      return _course!.data.courses.where((x) => x.selected).toList();
+  List<CourseName> getSelectedCourseData() {
+    if (courseData != null) {
+      return courseData!.data.courses.where((x) => x.selected).toList();
     }
     return [];
-  }
-
-//
+  } // output: Course1, Course2
+  // yang nilai selected nya true
 
 //
 
   // digunakan di home.dart
-  // hasilnya list course yang tersedia
-  List<CourseName> getCourseData() {
-    if (_course != null) {
-      return _course!.data.courses;
+  List<CourseName> getCourseName() {
+    if (courseData != null) {
+      return courseData!.data.courses;
     }
     return [];
   } // output => [Course1, Course2, ...] dipakai home page
+  // nama course yang dari api
 
 //
 
 //
 
-  // output nya Course yang dipilih di course_grid_tile.dat
-  CourseName? _coursestate;
-  CourseName? get coursestate => _coursestate;
-  void setCourseState(course) {
-    _coursestate = course;
+  // nilai nya Course yang dipilih di selection_course.dat
+  CourseName? courseNameState;
+  CourseName? get coursestate => courseNameState;
+  void setCourseNameState(course) {
+    courseNameState = course;
     notifyListeners();
-  } // misal output nya "Course1" dipakai untuk mencetak material di bawah
+  } // misal output nya "Course1" dipakai untuk mencetak nama2 materi dibawah di bawah
 
   List<Module> getCourseContent() {
-    return _coursestate!.materials;
-  } // output nya ["Penahuluan", "Penutup"]
+    return courseNameState!.materials;
+  } // output: ["Penahuluan", "Penutup"]
+  // jadi user tidak bisa mengakses 2 atau lebih materi karena yang disimpan hanya 1
+  // disimpan hanya untuk jadi patokan bagi layar materialContent
 
 //
 
 //
 
-  Module? _materialstate;
-  Module? get materialstate => _materialstate;
+  // sama kayak sebelumnya, menyimpan data materi yang di klik
+  Module? _materialNameState; // ini untuk dijadikan patokan
+  Module? get materialNamestate => _materialNameState;
+  // contoh: Pendahuluan
 
+  // ini mencetak semua konten materi yang ada di variabel _materialNameState
   List<ModuleContent>? _materialcontent;
   List<ModuleContent>? get materialcontent => _materialcontent;
+  // contoh: paragraph1, paragraph2
 
+  // ini mencetak semua pertanyaan per materi yang ada di variabel _materialNameState
   List<Question>? _questionstate;
   List<Question>? get questionstate => _questionstate;
+  // contoh: soal1, soal2
 
   void setMaterialContent(Module materi) {
-    _materialstate = materi;
+    _materialNameState = materi;
     _materialcontent = materi.materialContent;
     _questionstate = materi.questions;
     notifyListeners();
-  } // menyimpan materi yang di klik. misal "penadahuluan", isi materi dan soal
+  } // menyimpan materi yang di klik. misal "Pendahuluan", isi materi dan soal
 
 //
 
 //
 
   List<News> getNewsData() {
-    if (_course != null) {
-      return _course!.data.news;
+    if (courseData != null) {
+      return courseData!.data.news;
     }
     return [];
   }

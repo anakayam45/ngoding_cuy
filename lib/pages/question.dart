@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/trash/custom_scaffold.dart';
 
-class TestPage extends StatefulWidget {
+class QuestionPage extends StatefulWidget {
   static const routeName = "/test";
-  const TestPage({super.key});
+  const QuestionPage({super.key});
 
   @override
-  State<TestPage> createState() => _TestPageState();
+  State<QuestionPage> createState() => _QuestionPageState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _QuestionPageState extends State<QuestionPage> {
   String? jawaban;
   @override
   Widget build(BuildContext context) {

@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import '../data/model/materi_from_api.dart';
 import '../provider/course_activity.dart';
 
-class MaterialsContent extends StatelessWidget {
-  static String routeName = "/myMaterialsContent";
-  const MaterialsContent({super.key});
+class MaterialContentName extends StatelessWidget {
+  static String routeName = "/myMaterialContentName";
+  const MaterialContentName({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class MaterialsContent extends StatelessWidget {
             onTap: () {
               Provider.of<CourseAppActifity>(context, listen: false)
                   .setMaterialContent(selectedCourseName[index]);
-              Navigator.of(context).pushNamed(LearnPage.routeName);
+              Navigator.of(context).pushNamed(LearingPage.routeName);
             },
           );
         },

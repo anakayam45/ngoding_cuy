@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ngoding_cuy/common/my_theme_app.dart';
-import 'pages/material_content.dart';
+import 'pages/material_content_name.dart';
 import 'pages/selection_course.dart';
 import 'pages/starting.dart';
 import 'pages/learning.dart';
-import 'pages/profile.dart';
+import 'pages/profile_setting.dart';
 import 'pages/question.dart';
 import 'pages/home.dart';
 import 'provider/provider_config.dart';
@@ -26,15 +26,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: MyAppTheme.lightTheme,
-      initialRoute: StartPage.routeName,
+      initialRoute: LandingPage.routeName,
       routes: {
-        StartPage.routeName: (context) => const StartPage(),
+        LandingPage.routeName: (context) => const LandingPage(),
         HomePage.routeName: (context) => const HomePage(),
-        LearnPage.routeName: (context) => const LearnPage(),
-        TestPage.routeName: (context) => const TestPage(),
+        LearingPage.routeName: (context) => const LearingPage(),
+        QuestionPage.routeName: (context) => const QuestionPage(),
         ProfilePage.routeName: (context) => const ProfilePage(),
-        CoursePage.routeName: (context) => const HomePage(),
-        MaterialsContent.routeName: (context) => const MaterialsContent()
+        SelectedCoursePage.routeName: (context) => const SelectedCoursePage(),
+        MaterialContentName.routeName: (context) => const MaterialContentName()
       },
     );
   }

@@ -5,20 +5,20 @@ import 'package:provider/provider.dart';
 import '../data/model/materi_from_api.dart';
 import '../provider/course_activity.dart';
 
-class LearnPage extends StatefulWidget {
+class LearingPage extends StatefulWidget {
   static const routeName = "/learning";
-  const LearnPage({super.key});
+  const LearingPage({super.key});
 
   @override
-  State<LearnPage> createState() => _LearnPageState();
+  State<LearingPage> createState() => _LearingPageState();
 }
 
-class _LearnPageState extends State<LearnPage> {
+class _LearingPageState extends State<LearingPage> {
   int i = 1;
   @override
   Widget build(BuildContext context) {
     Module? materialContent =
-        Provider.of<CourseAppActifity>(context).materialstate;
+        Provider.of<CourseAppActifity>(context).materialNamestate;
     return Scaffold(
       appBar: AppBar(
         title: Text(

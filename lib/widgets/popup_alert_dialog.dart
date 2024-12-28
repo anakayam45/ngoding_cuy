@@ -3,7 +3,7 @@ import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 
-import '../pages/material_content.dart';
+import '../pages/material_content_name.dart';
 
 class MyPopUp extends StatelessWidget {
   final CourseName course;
@@ -69,16 +69,18 @@ class MyPopUp extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Provider.of<CourseAppActifity>(context, listen: false)
-                    .setSelectingCourse(course.id); // mengubah selected jadi true
+                    .upDateSelectingCourseData(
+                        course.id); // mengubah selected jadi true
 
                 Provider.of<CourseAppActifity>(context, listen: false)
-                    .setCourseState(course); // menyimpan course yang terakhir
+                    .setCourseNameState(
+                        course); // menyimpan course yang terakhir
                 //                              kali diakses
 
                 Navigator.pop(context); // menghilangkan Popup
 
                 Navigator.of(context) // pindah ke material page
-                    .pushNamed(MaterialsContent.routeName);
+                    .pushNamed(MaterialContentName.routeName);
               },
               child: const Text("Pilih"),
             ),
