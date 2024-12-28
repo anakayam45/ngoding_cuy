@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/trash/custom_scaffold.dart';
+import 'package:ngoding_cuy/kada%20dipakai%20tapi%20jangan%20dibuang/custom_scaffold.dart';
 
 class QuestionPage extends StatefulWidget {
   static const routeName = "/test";

@@ -1,28 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/widgets/widget_for_learning_page.dart';
 import 'package:provider/provider.dart';
-
-import '../data/model/materi_from_api.dart';
 import '../provider/course_activity.dart';
 
-class LearingPage extends StatefulWidget {
+class LearningPage extends StatefulWidget {
   static const routeName = "/learning";
-  const LearingPage({super.key});
+  const LearningPage({super.key});
 
   @override
-  State<LearingPage> createState() => _LearingPageState();
+  State<LearningPage> createState() => _LearningPageState();
 }
 
-class _LearingPageState extends State<LearingPage> {
+class _LearningPageState extends State<LearningPage> {
   int i = 1;
+
   @override
   Widget build(BuildContext context) {
-    Module? materialContent =
-        Provider.of<CourseAppActifity>(context).materialNamestate;
+    final material = Provider.of<CourseAppActifity>(context).materialNamestate;
+
+    if (material == null) {
+      return const Scaffold(
+        body: Center(
+          child: Text("No material available."),
+        ),
+      );
+    }
+
+    final content = material.materialContent;
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          materialContent!.title,
+          material.title,
           style: const TextStyle(color: Colors.black),
         ),
       ),
@@ -33,8 +41,8 @@ class _LearingPageState extends State<LearingPage> {
             children: [
               Flexible(
                 child: ListView.builder(
-                  itemBuilder: (contex, index) {
-                    return seleksi(materialContent.materialContent[index]);
+                  itemBuilder: (context, index) {
+                    return seleksi(content[index]);
                   },
                   itemCount: i,
                   shrinkWrap: true,
@@ -48,16 +56,16 @@ class _LearingPageState extends State<LearingPage> {
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (materialContent.materialContent.length != i) {
-                      setState(() {
-                        i += 1;
-                      });
-                    }
-                  },
-                  child: const Text("data"),
-                ),
+                child: content.length != i
+                    ? ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            i += 1;
+                          });
+                        },
+                        child: const Text("Load More"),
+                      )
+                    : const ButtonToTest(),
               ),
             ),
           )

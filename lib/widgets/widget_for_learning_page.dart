@@ -4,6 +4,7 @@ import 'package:ngoding_cuy/pages/question.dart';
 import '../data/model/materi_from_api.dart';
 
 Widget seleksi(ModuleContent content) {
+  print(content.type);
   switch (content.type) {
     case "head":
       return MyHeading(
@@ -21,7 +22,9 @@ Widget seleksi(ModuleContent content) {
       );
 
     default:
-      return const ButtonToTest();
+      return MyHeading(
+        content: content,
+      );
   }
 }
 

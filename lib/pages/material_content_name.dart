@@ -27,7 +27,7 @@ class MaterialContentName extends StatelessWidget {
             onTap: () {
               Provider.of<CourseAppActifity>(context, listen: false)
                   .setMaterialContent(selectedCourseName[index]);
-              Navigator.of(context).pushNamed(LearingPage.routeName);
+              Navigator.of(context).pushNamed(LearningPage.routeName);
             },
           );
         },
