@@ -3,6 +3,8 @@ import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/material_content.dart';
+
 class MyPopUp extends StatelessWidget {
   final CourseName course;
   const MyPopUp({super.key, required this.course});
@@ -39,8 +41,7 @@ class MyPopUp extends StatelessWidget {
                           ?.copyWith(
                               fontWeight: FontWeight.w600, color: Colors.blue),
                     ),
-                    const SizedBox(
-                        height: 8), // Spasi antara judul dan deskripsi
+                    const SizedBox(height: 8),
                     Text(
                       course.description,
                       textAlign: TextAlign.center,
@@ -62,12 +63,22 @@ class MyPopUp extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
               child: const Text("Batal"),
             ),
+            //
+            // action 2
+            //
             TextButton(
               onPressed: () {
-                Provider.of<CourseProvider>(context, listen: false)
-                    .selectingCourse(course.id);
-                print("from Pop up => ${course.id}");
-                Navigator.pop(context);
+                Provider.of<CourseAppActifity>(context, listen: false)
+                    .setSelectingCourse(course.id); // mengubah selected jadi true
+
+                Provider.of<CourseAppActifity>(context, listen: false)
+                    .setCourseState(course); // menyimpan course yang terakhir
+                //                              kali diakses
+
+                Navigator.pop(context); // menghilangkan Popup
+
+                Navigator.of(context) // pindah ke material page
+                    .pushNamed(MaterialsContent.routeName);
               },
               child: const Text("Pilih"),
             ),

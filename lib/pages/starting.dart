@@ -66,6 +66,10 @@ class _StartPageState extends State<StartPage> {
 
   Widget buildAndro(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(["Ngoding cuy", "My learning path", "Profile"][pageIndex]),
+      ),
+      backgroundColor: const Color.fromARGB(255, 225, 228, 228),
       body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: pageIcon,
@@ -94,7 +98,7 @@ class _StartPageState extends State<StartPage> {
           );
         } else if (snapshot.hasData && snapshot.data != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            Provider.of<CourseProvider>(context, listen: false)
+            Provider.of<CourseAppActifity>(context, listen: false)
                 .addCourse(snapshot.data!);
           });
 

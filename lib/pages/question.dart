@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/widgets/custom_scaffold.dart';
+import 'package:ngoding_cuy/trash/custom_scaffold.dart';
 
 class TestPage extends StatefulWidget {
   static const routeName = "/test";

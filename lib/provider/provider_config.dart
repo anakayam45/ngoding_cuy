@@ -9,7 +9,7 @@ void mainProvider(main) async {
     providers: [
       ChangeNotifierProvider(create: (_) => TimeProvider()),
       ChangeNotifierProvider(create: (_) => SchedulingProvider()),
-      ChangeNotifierProvider(create: (_) => CourseProvider())
+      ChangeNotifierProvider(create: (_) => CourseAppActifity())
     ],
     child: main,
   ));
