@@ -13,7 +13,7 @@ class SelectedCoursePage extends StatelessWidget {
 //
 //
     List<CourseName> selectedCourseName =
-        Provider.of<CourseAppActifity>(context).getSelectedCourseData();
+        Provider.of<CourseAppActifity>(context).getSelectedCourseData;
 //
 //
     return ListView.builder(

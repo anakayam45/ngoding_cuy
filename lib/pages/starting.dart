@@ -99,7 +99,7 @@ class _LandingPageState extends State<LandingPage> {
         } else if (snapshot.hasData && snapshot.data != null) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Provider.of<CourseAppActifity>(context, listen: false)
-                .addCourse(snapshot.data!);
+                .addCourse(snapshot.data);
           });
 
           return PlatformWidget(

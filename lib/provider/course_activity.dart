@@ -9,7 +9,7 @@ class CourseAppActifity extends ChangeNotifier {
     courseData = json;
     notifyListeners();
   } // nilainya model Ngodingcuy
-  // menambahkan data dari service_api.dart
+  // memasukkan data dari service_api.dart
 
 //
 
@@ -23,17 +23,14 @@ class CourseAppActifity extends ChangeNotifier {
       }
       notifyListeners();
     }
-  } // mengubah nilai selected nya jadi true
+  } // mengubah nilai selected course di class Module jadi true
 
 //
 
   // digunakan di selection_page.dart
-  List<CourseName> getSelectedCourseData() {
-    if (courseData != null) {
-      return courseData!.data.courses.where((x) => x.selected).toList();
-    }
-    return [];
-  } // output: Course1, Course2
+  List<CourseName> get getSelectedCourseData =>
+      courseData!.data.courses.where((x) => x.selected).toList();
+  // output: Course1, Course2
   // yang nilai selected nya true
 
 //

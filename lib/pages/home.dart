@@ -22,7 +22,8 @@ class _HomePageState extends State<HomePage> {
     //
     final List<CourseName> coursename =
         Provider.of<CourseAppActifity>(context).getCourseName();
-    final List<News> news = Provider.of<CourseAppActifity>(context).getNewsData();
+    final List<News> news =
+        Provider.of<CourseAppActifity>(context).getNewsData();
     //
     //
     return SingleChildScrollView(

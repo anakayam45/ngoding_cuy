@@ -96,6 +96,7 @@ class Module {
 }
 
 class ModuleContent {
+  bool isdone = false;
   String id;
   String content;
   String type;
@@ -116,6 +117,8 @@ class ModuleContent {
 }
 
 class Question {
+  bool isdone = false;
+
   String id;
   String questionText;
   List<Answer> choices;

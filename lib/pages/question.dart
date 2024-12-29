@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/kada%20dipakai%20tapi%20jangan%20dibuang/custom_scaffold.dart';
+import 'package:ngoding_cuy/provider/course_activity.dart';
+import 'package:provider/provider.dart';
 
 class QuestionPage extends StatefulWidget {
   static const routeName = "/test";
@@ -11,8 +14,11 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   String? jawaban;
+  int i = 0;
   @override
   Widget build(BuildContext context) {
+    List<Question>? question =
+        Provider.of<CourseAppActifity>(context).questionstate;
     return MyScaffold(
       title: "Soal",
       body: Center(
@@ -20,14 +26,17 @@ class _QuestionPageState extends State<QuestionPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Ini Pertanyaan?"),
+            Text(
+              question![i].questionText,
+              style: const TextStyle(color: Colors.black),
+            ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: 4,
+              itemCount: question[i].choices.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
                   leading: Radio(
-                    value: "value",
+                    value: question[i].choices[index].text,
                     groupValue: jawaban,
                     onChanged: (String? value) {
                       setState(() {
@@ -35,7 +44,7 @@ class _QuestionPageState extends State<QuestionPage> {
                       });
                     },
                   ),
-                  title: const Text("ini Jawaban"),
+                  title: Text(question[i].choices[index].text),
                 );
               },
             ),
@@ -43,9 +52,25 @@ class _QuestionPageState extends State<QuestionPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(onPressed: () {}, child: const Text("Kembali")),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Kembali")),
                 const SizedBox(width: 10),
-                ElevatedButton(onPressed: () {}, child: const Text("Kembali"))
+                ElevatedButton(
+                    onPressed: () {
+                      print("Gak bisa $i");
+                      if (question.length - 1 != i) {
+                        print("Tambah $i");
+                        setState(() {
+                          i += 1;
+                        });
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text("Kirim"))
               ],
             )
           ],

@@ -81,7 +81,7 @@ class ButtonToTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
         onPressed: () {
-          Navigator.pushNamed(context, QuestionPage.routeName);
+          Navigator.pushReplacementNamed(context, QuestionPage.routeName);
         },
         child: const Text("Kerjakan Soal"));
   }
