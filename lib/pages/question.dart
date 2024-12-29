@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/kada%20dipakai%20tapi%20jangan%20dibuang/custom_scaffold.dart';
 import 'package:ngoding_cuy/provider/course_activity.dart';
+import 'package:ngoding_cuy/widgets/wrong_correct_popup.dart';
 import 'package:provider/provider.dart';
 
 class QuestionPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
-  String? jawaban;
+  int? jawaban;
   int i = 0;
   @override
   Widget build(BuildContext context) {
@@ -35,10 +36,10 @@ class _QuestionPageState extends State<QuestionPage> {
               itemCount: question[i].choices.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  leading: Radio(
-                    value: question[i].choices[index].text,
+                  leading: Radio<int>(
+                    value: index,
                     groupValue: jawaban,
-                    onChanged: (String? value) {
+                    onChanged: (value) {
                       setState(() {
                         jawaban = value;
                       });
@@ -60,14 +61,30 @@ class _QuestionPageState extends State<QuestionPage> {
                 const SizedBox(width: 10),
                 ElevatedButton(
                     onPressed: () {
-                      print("Gak bisa $i");
-                      if (question.length - 1 != i) {
-                        print("Tambah $i");
-                        setState(() {
-                          i += 1;
-                        });
+                      if (question[i].choices[jawaban!].isCorrect) {
+                        if (question.length - 1 != i) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return const WrongOrCorrect(
+                                  action: true,
+                                );
+                              });
+                          setState(() {
+                            jawaban = 5;
+                            i += 1;
+                          });
+                        } else {
+                          Navigator.pop(context);
+                        }
                       } else {
-                        Navigator.pop(context);
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return const WrongOrCorrect(
+                                action: false,
+                              );
+                            });
                       }
                     },
                     child: const Text("Kirim"))
