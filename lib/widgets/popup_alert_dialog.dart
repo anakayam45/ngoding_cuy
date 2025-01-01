@@ -3,8 +3,6 @@ import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 
-import '../pages/material_content_name.dart';
-
 class MyPopUp extends StatelessWidget {
   final CourseName course;
   const MyPopUp({super.key, required this.course});
@@ -78,9 +76,6 @@ class MyPopUp extends StatelessWidget {
                 //                              kali diakses
 
                 Navigator.pop(context); // menghilangkan Popup
-
-                Navigator.of(context) // pindah ke material page
-                    .pushNamed(MaterialContentName.routeName);
               },
               child: const Text("Pilih"),
             ),

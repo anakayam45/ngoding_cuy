@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../utils/platform_case.dart';
 import 'profile_setting.dart';
-import 'selection_course.dart';
+import 'selection_page.dart';
 
 class LandingPage extends StatefulWidget {
   static const routeName = "/";

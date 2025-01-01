@@ -18,10 +18,14 @@ class _LearningPageState extends State<LearningPage> {
   Widget build(BuildContext context) {
     final material = Provider.of<CourseAppActifity>(context).materialNamestate;
 
-    if (material == null) {
-      return const Scaffold(
-        body: Center(
-          child: Text("No material available."),
+    if (material == null || material.materialContent.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Center(
+          child: Text(
+            "No material available.",
+            style: TextStyle(color: Colors.black),
+          ),
         ),
       );
     }

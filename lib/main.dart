@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ngoding_cuy/common/my_theme_app.dart';
 import 'pages/learning.dart';
-import 'pages/material_content_name.dart';
-import 'pages/selection_course.dart';
+import 'pages/selection_page.dart';
 import 'pages/starting.dart';
 import 'pages/profile_setting.dart';
 import 'pages/question.dart';
@@ -30,11 +29,10 @@ class MyApp extends StatelessWidget {
       routes: {
         LandingPage.routeName: (context) => const LandingPage(),
         HomePage.routeName: (context) => const HomePage(),
-        LearningPage.routeName: (context) => const LearningPage(),
         QuestionPage.routeName: (context) => const QuestionPage(),
         ProfilePage.routeName: (context) => const ProfilePage(),
         SelectedCoursePage.routeName: (context) => const SelectedCoursePage(),
-        MaterialContentName.routeName: (context) => const MaterialContentName()
+        LearningPage.routeName: (context) => const LearningPage(),
       },
     );
   }
