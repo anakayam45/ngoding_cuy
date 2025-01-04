@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/pages/news_page.dart';
 
-import 'package:ngoding_cuy/widgets/course_grid_tile.dart';
 import 'package:ngoding_cuy/widgets/news_list_tile.dart';
 import 'package:provider/provider.dart';
 
 import '../data/model/materi_from_api.dart';
 import '../provider/course_activity.dart';
+import '../widgets/course_grid_tile.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "/home";
@@ -106,9 +106,8 @@ class _HomePageState extends State<HomePage> {
                             mainAxisExtent: 150),
                     itemCount: coursename.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return myCourse(
-                        context,
-                        coursename[index],
+                      return MyCourse(
+                        course: coursename[index],
                       );
                     },
                   ),
