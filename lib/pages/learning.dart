@@ -46,7 +46,7 @@ class _LearningPageState extends State<LearningPage> {
               Flexible(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-                    return seleksi(content[index]);
+                    return seleksi(context, content[index]);
                   },
                   itemCount: i,
                   shrinkWrap: true,
@@ -69,7 +69,7 @@ class _LearningPageState extends State<LearningPage> {
                         },
                         child: const Text("Load More"),
                       )
-                    : const ButtonToTest(),
+                    : buttonToTest(context),
               ),
             ),
           )

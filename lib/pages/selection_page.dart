@@ -21,25 +21,23 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    List<CourseName> courseName =
+    List<CourseName>? courseName =
         Provider.of<CourseAppActifity>(context).getSelectedCourseData;
-    List<Module> courseContent =
-        Provider.of<CourseAppActifity>(context).getCourseContent();
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: courseName.isEmpty || courseContent.isEmpty
-          ? const SizedBox(
-              height: 200,
-              child: Center(
-                child: Text(
-                  "Belum ada latihan",
-                  style: TextStyle(color: Colors.black),
-                ),
-              ))
+      body: courseName.isEmpty
+          ? const Center(
+              child: Text(
+                "Belum ada latihan yang dipilih",
+                style: TextStyle(color: Colors.black),
+              ),
+            )
           : ListView.separated(
               itemCount: courseName.length,
               separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemBuilder: (context, index) {
+                List<Module>? courseContent =
+                    Provider.of<CourseAppActifity>(context).getCourseContent();
                 final isExpanded = expandedIndex == index;
                 return GestureDetector(
                   onTap: () {
@@ -121,55 +119,49 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
                           ),
                         ),
                       ),
-                      courseContent.isEmpty
-                          ? const SizedBox()
-                          : AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                              width: screenWidth * .8,
-                              height: isExpanded
-                                  ? screenHeight *
-                                      .1 *
-                                      (courseContent.length / 1.5)
-                                  : 0,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(8),
-                                    bottomRight: Radius.circular(8)),
-                                color: Color.fromARGB(255, 236, 235, 235),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black45,
-                                    blurRadius: 5,
-                                    offset: Offset(2, 2),
-                                  ),
-                                ],
-                              ),
-                              child: AnimatedOpacity(
-                                opacity: isExpanded ? 1 : 0,
-                                duration: const Duration(milliseconds: 300),
-                                child: ListView.builder(
-                                  itemCount: courseContent.length,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder:
-                                      (BuildContext context, int subIndex) {
-                                    return ListTile(
-                                      trailing: const Icon(Icons.play_arrow),
-                                      title:
-                                          Text(courseContent[subIndex].title),
-                                      onTap: () {
-                                        Provider.of<CourseAppActifity>(context,
-                                                listen: false)
-                                            .setMaterialContent(
-                                                courseContent[subIndex]);
-                                        Navigator.of(context)
-                                            .pushNamed(LearningPage.routeName);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        width: screenWidth * .8,
+                        height: isExpanded
+                            ? screenHeight * .1 * (courseContent.length / 1.5)
+                            : 0,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8)),
+                          color: Color.fromARGB(255, 236, 235, 235),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black45,
+                              blurRadius: 5,
+                              offset: Offset(2, 2),
                             ),
+                          ],
+                        ),
+                        child: AnimatedOpacity(
+                          opacity: isExpanded ? 1 : 0,
+                          duration: const Duration(milliseconds: 300),
+                          child: ListView.builder(
+                            itemCount: courseContent.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int subIndex) {
+                              return ListTile(
+                                trailing: const Icon(Icons.play_arrow),
+                                title: Text(courseContent[subIndex].title),
+                                onTap: () {
+                                  Provider.of<CourseAppActifity>(context,
+                                          listen: false)
+                                      .setMaterialContent(
+                                          courseContent[subIndex]);
+                                  Navigator.of(context)
+                                      .pushNamed(LearningPage.routeName);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 );

@@ -87,8 +87,10 @@ class _LandingPageState extends State<LandingPage> {
         var state = snapshot.connectionState;
 
         if (state != ConnectionState.done) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return const Material(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
           );
         } else if (snapshot.hasError) {
           return Center(

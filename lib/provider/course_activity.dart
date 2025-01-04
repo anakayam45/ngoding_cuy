@@ -92,10 +92,10 @@ class CourseAppActifity extends ChangeNotifier {
 
 //
 
-  List<News> getNewsData() {
-    if (courseData != null) {
-      return courseData!.data.news;
-    }
-    return [];
+  News? _newsState;
+  List<News> get getNewsData => course!.data.news;
+  News? get newsSate => _newsState;
+  void setNewsContent(News news) {
+    _newsState = news;
   }
 }

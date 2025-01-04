@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:ngoding_cuy/common/my_theme_app.dart';
+import 'package:ngoding_cuy/pages/news_page.dart';
 import 'pages/learning.dart';
 import 'pages/selection_page.dart';
 import 'pages/starting.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ProfilePage.routeName: (context) => const ProfilePage(),
         SelectedCoursePage.routeName: (context) => const SelectedCoursePage(),
         LearningPage.routeName: (context) => const LearningPage(),
+        MyNewspage.routename: (context) => const MyNewspage(),
       },
     );
   }

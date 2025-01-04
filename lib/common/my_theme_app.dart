@@ -6,14 +6,14 @@ class MyAppTheme {
     primarySwatch: Colors.blue,
     textTheme: TextTheme(
       displayLarge: const TextStyle(
-        fontSize: 48,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: Colors.black,
+        fontSize: 26,
+        fontWeight: FontWeight.w700,
       ),
       displayMedium: const TextStyle(
-        fontSize: 36,
+        fontSize: 18,
         fontWeight: FontWeight.w600,
-        color: Colors.white,
+        color: Colors.black,
       ),
       displaySmall: const TextStyle(
         fontSize: 28,

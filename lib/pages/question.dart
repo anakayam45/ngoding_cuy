@@ -23,75 +23,84 @@ class _QuestionPageState extends State<QuestionPage> {
     return MyScaffold(
       title: "Soal",
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              question![i].questionText,
-              style: const TextStyle(color: Colors.black),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: question[i].choices.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: Radio<int>(
-                    value: index,
-                    groupValue: jawaban,
-                    onChanged: (value) {
-                      setState(() {
-                        jawaban = value;
-                      });
+        child: question!.isEmpty
+            ? const SizedBox(
+                height: 200,
+                child: Center(
+                  child: Text(
+                    "Belum ada Pertanyan",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ))
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    question[i].questionText,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: question[i].choices.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        leading: Radio<int>(
+                          value: index,
+                          groupValue: jawaban,
+                          onChanged: (value) {
+                            setState(() {
+                              jawaban = value;
+                            });
+                          },
+                        ),
+                        title: Text(question[i].choices[index].text),
+                      );
                     },
                   ),
-                  title: Text(question[i].choices[index].text),
-                );
-              },
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text("Kembali")),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                    onPressed: () {
-                      if (question[i].choices[jawaban!].isCorrect) {
-                        if (question.length - 1 != i) {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return const WrongOrCorrect(
-                                  action: true,
-                                );
-                              });
-                          setState(() {
-                            jawaban = 5;
-                            i += 1;
-                          });
-                        } else {
-                          Navigator.pop(context);
-                        }
-                      } else {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return const WrongOrCorrect(
-                                action: false,
-                              );
-                            });
-                      }
-                    },
-                    child: const Text("Kirim"))
-              ],
-            )
-          ],
-        ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Kembali")),
+                      const SizedBox(width: 10),
+                      ElevatedButton(
+                          onPressed: () {
+                            if (question[i].choices[jawaban!].isCorrect) {
+                              if (question.length - 1 != i) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return const WrongOrCorrect(
+                                        action: true,
+                                      );
+                                    });
+                                setState(() {
+                                  jawaban = 5;
+                                  i += 1;
+                                });
+                              } else {
+                                Navigator.pop(context);
+                              }
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return const WrongOrCorrect(
+                                      action: false,
+                                    );
+                                  });
+                            }
+                          },
+                          child: const Text("Kirim"))
+                    ],
+                  )
+                ],
+              ),
       ),
     );
   }

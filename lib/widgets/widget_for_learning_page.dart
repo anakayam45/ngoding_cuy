@@ -3,86 +3,66 @@ import 'package:ngoding_cuy/pages/question.dart';
 
 import '../data/model/materi_from_api.dart';
 
-Widget seleksi(ModuleContent content) {
+Widget seleksi(BuildContext context, ModuleContent content) {
   print(content.type);
   switch (content.type) {
     case "head":
-      return MyHeading(
-        content: content,
+      return myHeading(
+        context,
+        content,
       );
 
     case "text":
-      return MyParagraph(
-        content: content,
+      return myParagraph(
+        context,
+        content,
       );
 
     case "image":
-      return ImageFromNetwork(
-        content: content,
+      return imageFromNetwork(
+        context,
+        content,
       );
 
     default:
-      return MyHeading(
-        content: content,
+      return myHeading(
+        context,
+        content,
       );
   }
 }
 
-class MyHeading extends StatelessWidget {
-  final ModuleContent? content;
-  const MyHeading({super.key, this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      content!.content,
-      style: const TextStyle(
-          color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700),
-    );
-  }
+Widget myHeading(BuildContext context, ModuleContent? content) {
+  return Text(
+    content!.content,
+    style: Theme.of(context).textTheme.displayLarge,
+  );
 }
 
-class MyParagraph extends StatelessWidget {
-  final ModuleContent? content;
-  const MyParagraph({super.key, this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      content!.content,
-      style: const TextStyle(color: Colors.black),
-    );
-  }
+Widget myParagraph(BuildContext context, ModuleContent? content) {
+  return Text(
+    content!.content,
+    style: const TextStyle(color: Colors.black),
+  );
 }
 
-class ImageFromNetwork extends StatelessWidget {
-  final ModuleContent? content;
-  const ImageFromNetwork({super.key, this.content});
+Widget imageFromNetwork(BuildContext context, ModuleContent? content) {
+  return Image.network(
+    content!.content,
+    width: MediaQuery.of(context).size.width - 50,
+    errorBuilder: (context, error, stackTrace) {
+      print(content.content);
+      return const Center(
+        child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
+      );
+    },
+  );
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      content!.content,
-      width: MediaQuery.of(context).size.width - 50,
-      errorBuilder: (context, error, stackTrace) {
-        print(content!.content);
-        return const Center(
-          child: Icon(Icons.broken_image, size: 50, color: Colors.grey),
-        );
+Widget buttonToTest(BuildContext context) {
+  return TextButton(
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, QuestionPage.routeName);
       },
-    );
-  }
-}
-
-class ButtonToTest extends StatelessWidget {
-  const ButtonToTest({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-        onPressed: () {
-          Navigator.pushReplacementNamed(context, QuestionPage.routeName);
-        },
-        child: const Text("Kerjakan Soal"));
-  }
+      child: const Text("Kerjakan Soal"));
 }
