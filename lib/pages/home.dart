@@ -39,9 +39,14 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text("Berita",
-                  style: Theme.of(context).textTheme.displayLarge),
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                "Berita",
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge
+                    ?.copyWith(color: Colors.white),
+              ),
             ),
             //
             //
@@ -76,13 +81,6 @@ class _HomePageState extends State<HomePage> {
             //
             //
             //
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                "Latihan",
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
-            ),
             //
             //
             //
@@ -95,22 +93,56 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(color: Colors.black),
                       ),
                     ))
-                : GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                : Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          offset: Offset(0, -5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          child: Text(
+                            "Latihan",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(color: Colors.black),
+                          ),
+                        ),
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 10,
-                            mainAxisExtent: 150),
-                    itemCount: coursename.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return MyCourse(
-                        course: coursename[index],
-                      );
-                    },
+                            mainAxisExtent: 150,
+                          ),
+                          itemCount: coursename.length,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: MyCourse(
+                              course: coursename[index],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+
+            //
             //
             //
           ],

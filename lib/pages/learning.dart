@@ -38,42 +38,45 @@ class _LearningPageState extends State<LearningPage> {
           style: const TextStyle(color: Colors.black),
         ),
       ),
-      body: Stack(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return seleksi(context, content[index]);
-                  },
-                  itemCount: i,
-                  shrinkWrap: true,
-                  physics: const AlwaysScrollableScrollPhysics(),
+      body: SafeArea(
+        minimum: const EdgeInsets.all(8),
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      return seleksi(context, content[index]);
+                    },
+                    itemCount: i,
+                    shrinkWrap: true,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 10,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: content.length != i
+                      ? ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              i += 1;
+                            });
+                          },
+                          child: const Text("Load More"),
+                        )
+                      : buttonToTest(context),
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 10,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                child: content.length != i
-                    ? ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            i += 1;
-                          });
-                        },
-                        child: const Text("Load More"),
-                      )
-                    : buttonToTest(context),
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

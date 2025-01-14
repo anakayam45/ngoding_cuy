@@ -1,54 +1,80 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
+
+import '../model/materi_from_api.dart';
 
 class ApiService {
-  // static const String _domain = "https://ngoding.ayam45.shop/";
-  // static const String _path = "api.php";
-  // static const String _apikey = "?api_key=1945";
-
-  static const String _domain = "http://10.0.2.2:8080";
-  static const String _path = "/upload/api.php";
-  static const String _apikey = "?api_key=1945";
+  static const String domain = "https://ngoding.ayam45.shop";
 
   Future<NgodingCuy> availableCourse() async {
-    print("api service start");
-    final res = await http
-        .get(Uri.parse("$_domain$_path$_apikey"))
-        .timeout(const Duration(seconds: 10), onTimeout: () {
-      throw Exception("Request timeout");
-    });
-
-    if (res.statusCode == 200) {
-      print("api service finsih");
-      return NgodingCuy.fromJson(json.decode(res.body));
-    } else {
-      print("api service cancel");
-      throw Exception("Network eyoy!");
-    }
-  }
-}
-
-class LoginAndRegister {
-  static const String _domain = "http://10.0.2.2:8080";
-  static const String _path = "/upload/api.php";
-  static const String _apikey = "?api_key=1945";
-
-  Future<NgodingCuy> getAcces() async {
-    print("api service start");
+    const String url = "$domain/api.php?api_key=1945";
     try {
-      final res = await http.get(Uri.parse("$_domain$_path$_apikey"));
+      final res =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
 
       if (res.statusCode == 200) {
-        print("api service finsih");
         return NgodingCuy.fromJson(json.decode(res.body));
       } else {
-        print("api service cancel");
-        throw Exception("Network eyoy!");
+        throw Exception("HTTP Error: ${res.statusCode}");
+      }
+    } on Exception catch (e) {
+      throw Exception("Error fetching courses: $e");
+    }
+  }
+
+  Future<Map<String, dynamic>> login(String email, String pass) async {
+    String encodedPass = base64Encode(utf8.encode(pass));
+    const String url = "$domain/login.php";
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {'login': '1', 'email': email, 'pass': encodedPass},
+      ).timeout(const Duration(seconds: 10));
+
+      final result = json.decode(response.body);
+
+      if (result["status"] != "error") {
+        return result;
+      } else {
+        throw Exception(result['message']);
       }
     } catch (e) {
-      print(e);
-      throw Exception("Network eyoy!: $e");
+      throw Exception("Login error: $e");
+    }
+  }
+
+  Future<String> register(String user, String email, String pass) async {
+    String encodedPass = base64Encode(utf8.encode(pass));
+    const String url = "$domain/login.php";
+    print("Mengirim data...");
+
+    try {
+      final res = await http.post(
+        Uri.parse(url),
+        body: {
+          'regis': '1',
+          'username': user,
+          'email': email,
+          'pass': encodedPass,
+        },
+      ).timeout(const Duration(seconds: 10)); // Kurangi timeout jika perlu
+
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> response = json.decode(res.body);
+
+        if (response["status"] == "success") {
+          print("Registrasi berhasil: ${response['message']}");
+          return response['message'];
+        } else {
+          throw Exception("Gagal registrasi: ${response['message']}");
+        }
+      } else {
+        throw Exception("HTTP Error: ${res.statusCode}");
+      }
+    } catch (e) {
+      print("Error saat registrasi: $e");
+      throw Exception("Register error: $e");
     }
   }
 }

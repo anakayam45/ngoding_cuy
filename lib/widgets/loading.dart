@@ -21,3 +21,20 @@ class _MyCostumLoadingState extends State<MyCostumLoading> {
     );
   }
 }
+
+class MyBarProgresor extends StatelessWidget {
+  final int step;
+  const MyBarProgresor({
+    super.key,
+    required this.step,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LinearProgressIndicator(
+      value: step / 100,
+      backgroundColor: Colors.white24,
+      color: Colors.white,
+    );
+  }
+}

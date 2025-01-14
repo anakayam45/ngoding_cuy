@@ -5,6 +5,9 @@ import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:ngoding_cuy/widgets/warning.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
+import '../provider/user_data.dart';
+
 class QuestionPage extends StatefulWidget {
   static const routeName = "/test";
   const QuestionPage({super.key});
@@ -64,7 +67,9 @@ class _QuestionPageState extends State<QuestionPage> {
                 // tombol kirim
                 ElevatedButton(
                     onPressed: () {
+                      // jawaban benar
                       if (question[i].choices[jawaban!].isCorrect) {
+                        // jika soal belum habis
                         if (question.length - 1 != i) {
                           showDialog(
                               context: context,
@@ -74,7 +79,8 @@ class _QuestionPageState extends State<QuestionPage> {
                                       Navigator.pop(context);
                                     },
                                   ));
-                          setState(() {
+                          // lanjut ke soal berikutnya
+                          setState(() async {
                             jawaban = 5;
                             i += 1;
                           });
@@ -87,6 +93,12 @@ class _QuestionPageState extends State<QuestionPage> {
                                     color: Colors.red,
                                   ));
                         }
+
+                        // menyimpan score
+                        Provider.of<Userdata>(context).setScore(question[i].id);
+                        List<String>? scores =
+                            Provider.of<Userdata>(context).score;
+                        prefs!.setStringList("scores", scores!);
                       } else {
                         showDialog(
                             context: context,

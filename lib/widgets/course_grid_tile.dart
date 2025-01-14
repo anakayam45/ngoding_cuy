@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/model/materi_from_api.dart';
 import 'package:ngoding_cuy/widgets/popup_alert_dialog.dart';
-import 'package:ngoding_cuy/widgets/effect.dart';
 
 class MyCourse extends StatelessWidget {
   final CourseName course;
@@ -10,77 +9,61 @@ class MyCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) => MyPopUp(
-                  course: course,
-                ));
-      },
-      child: Container(
-        margin: const EdgeInsets.all(8.0), // Jarak antar item di grid
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white,
-            width: 2.5,
-            strokeAlign: BorderSide.strokeAlignOutside,
-          ),
-          boxShadow: [
-            myShaddow(),
-          ],
-        ),
-        child: GridTile(
-          // Header Image
-          header: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-            ),
-            child: Container(
-              height: 70,
-              color: const Color(0xFFBEC3C4),
-              child: Image.network(
-                course.image,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  print(course.image);
-                  return const Center(
-                    child:
-                        Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                  );
-                },
-              ),
-            ),
-          ),
-          // Main Content
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Stack(
-              children: [
-                Container(
-                  color: Colors.white,
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) => MyPopUp(
+                    course: course,
+                  ));
+        },
+        child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  blurRadius: 6,
+                  offset: const Offset(2, 3),
                 ),
-                Positioned(
-                  top: 80,
-                  left: 10,
-                  child: Text(
-                    course.name,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontSize: MediaQuery.of(context).size.height * 0.02,
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ),
-                TextDuration(course: course),
               ],
             ),
-          ),
-        ),
-      ),
-    );
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(12)),
+                  child: Image.network(
+                    course.image,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => const Icon(
+                      Icons.broken_image,
+                      size: 50,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    course.name,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    course.duration,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+              ],
+            )));
   }
 }
 

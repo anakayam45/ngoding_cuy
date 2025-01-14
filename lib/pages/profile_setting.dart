@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ngoding_cuy/provider/user_data.dart';
 import 'package:ngoding_cuy/widgets/time_picker.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/notification_settings.dart';
 
@@ -27,9 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Icon(Icons.person, size: 50, color: Colors.grey),
           ),
           const SizedBox(height: 10),
-          const Text(
-            'Username',
-            style: TextStyle(
+          Text(
+            Provider.of<Userdata>(context).name!,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: Colors.black54,

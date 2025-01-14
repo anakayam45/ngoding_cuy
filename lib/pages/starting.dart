@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/api/service_api.dart';
@@ -9,10 +8,15 @@ import 'package:ngoding_cuy/pages/selection_page.dart';
 import 'package:ngoding_cuy/provider/course_activity.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../provider/user_data.dart';
 import '../utils/platform_case.dart';
 import '../widgets/warning.dart';
+import 'login.dart';
 import 'profile_setting.dart';
+
+List<String>? courseIds;
 
 class LandingPage extends StatefulWidget {
   static const routeName = "/";
@@ -57,6 +61,58 @@ class _LandingPageState extends State<LandingPage> {
     });
   }
 
+  AppBar buildHomeAppBar(String name, int myScore) {
+    return AppBar(
+      forceMaterialTransparency: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leadingWidth: 180,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            const CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.white,
+              child: Icon(
+                Icons.person,
+                color: Colors.blue,
+                size: 28,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Text(
+              name,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          const Icon(
+            Icons.diamond_outlined,
+            color: Color(0xFFFFD700),
+            size: 26,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            myScore.toString(),
+            style: const TextStyle(
+              color: Color(0xFFFFD700),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget buildIos(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
@@ -71,11 +127,23 @@ class _LandingPageState extends State<LandingPage> {
   }
 
   Widget buildAndro(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(["Ngoding cuy", "My learning path", "Profile"][pageIndex]),
-        shadowColor: Colors.black,
+    int? myScore = Provider.of<Userdata>(context).score?.toSet().length ?? 0;
+    String? name = Provider.of<Userdata>(context).name ?? "Budi";
+    List<AppBar> appBars = [
+      buildHomeAppBar(name, myScore),
+      AppBar(
+        title: const Text("My learning path"),
+        backgroundColor: Colors.transparent,
       ),
+      AppBar(
+        title: const Text("Settings"),
+        backgroundColor: Colors.transparent,
+      ),
+    ];
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF1DCFF8),
+      appBar: appBars[pageIndex],
       body: pages[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: pageIcon,
@@ -89,17 +157,20 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<NgodingCuy>(
-      future: ngoding,
-      builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
+    final userData = Provider.of<Userdata>(context, listen: false).name;
+    if (userData!.isEmpty) {
+      return const MyLoginPage();
+    } else {
+      return FutureBuilder<NgodingCuy>(
+        future: ngoding,
+        builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Material(
               child: Center(
                 child: CircularProgressIndicator(),
               ),
             );
-          case ConnectionState.done:
+          } else if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
               return Material(
                 color: Colors.grey,
@@ -110,29 +181,40 @@ class _LandingPageState extends State<LandingPage> {
                           notificationBody: "Lorem Ipsum Dolorsit amet!",
                         )),
               );
-            }
-            if (snapshot.hasData && snapshot.data != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Provider.of<CourseAppActifity>(context, listen: false)
-                    .addCourse(snapshot.data!);
+            } else if (snapshot.hasData && snapshot.data != null) {
+              WidgetsBinding.instance.addPostFrameCallback((_) async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                List<String>? courseIds = prefs.getStringList("courseId");
+                if (context.mounted) {
+                  for (var id in courseIds ?? []) {
+                    Provider.of<CourseAppActifity>(context)
+                        .upDateSelectingCourseData(id);
+                    Provider.of<Userdata>(context, listen: false)
+                        .setCourseIds(id);
+                  }
+                }
               });
+              Provider.of<CourseAppActifity>(context, listen: false)
+                  .addCourse(snapshot.data!);
               return PlatformWidget(
                 androidBuilder: buildAndro,
                 iosBuilder: buildIos,
               );
+            } else {
+              return WarningPopUp(
+                  title: "Data tidak ada",
+                  onPressed: () => Restart.restartApp(
+                        notificationTitle: "Restart Aja Bang",
+                        notificationBody: "Lorem Ipsum Dolorsit amet!",
+                      ));
             }
-            return WarningPopUp(
-                title: "Data tidak ada",
-                onPressed: () => Restart.restartApp(
-                      notificationTitle: "Restart Aja Bang",
-                      notificationBody: "Lorem Ipsum Dolorsit amet!",
-                    ));
-          default:
+          } else {
             return const WarningPopUp(
               title: "Data tidak ada",
             );
-        }
-      },
-    );
+          }
+        },
+      );
+    }
   }
 }

@@ -34,42 +34,8 @@ Widget textField(
       ),
     ),
     obscureText: pass,
-  );
-}
-
-Widget myTextButton({
-  required VoidCallback onPressed,
-  String data = "Enter",
-}) {
-  return ElevatedButton(
-    onPressed: onPressed,
-    style: ElevatedButton.styleFrom(
-      elevation: 0,
-      backgroundColor: const Color(0xFF00BF6D),
-      foregroundColor: Colors.white,
-      minimumSize: const Size(double.infinity, 48),
-      shape: const StadiumBorder(),
-    ),
-    child: Text(data),
-  );
-}
-
-Widget myAnimatedOpacity(
-    BuildContext context, double opacity, String title, VoidCallback onTap) {
-  return AnimatedOpacity(
-    duration: const Duration(milliseconds: 400),
-    opacity: opacity,
-    child: Center(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Text(
-          title,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
-      ),
-    ),
+    onChanged: (value) {
+      print(status ? "login" : "register");
+    },
   );
 }
