@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../model/materi_from_api.dart';
+import '../model/materi_ngoding_cuy.dart';
 
 class ApiService {
   static const String domain = "https://ngoding.ayam45.shop";

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/widgets/widget_for_learning_page.dart';
 import 'package:provider/provider.dart';
 import '../provider/course_activity.dart';
+import 'question_page.dart';
 
 class LearningPage extends StatefulWidget {
   static const routeName = "/learning";
@@ -80,4 +81,12 @@ class _LearningPageState extends State<LearningPage> {
       ),
     );
   }
+}
+
+Widget buttonToTest(BuildContext context) {
+  return TextButton(
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, QuestionPage.routeName);
+      },
+      child: const Text("Kerjakan Soal"));
 }

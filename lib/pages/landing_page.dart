@@ -2,19 +2,19 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/api/service_api.dart';
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
-import 'package:ngoding_cuy/pages/home.dart';
-import 'package:ngoding_cuy/pages/selection_page.dart';
-import 'package:ngoding_cuy/provider/course_activity.dart';
+import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
+import 'package:ngoding_cuy/pages/home_page.dart';
+import 'package:ngoding_cuy/pages/selected_course_page.dart';
 import 'package:provider/provider.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../provider/course_activity.dart';
 import '../provider/user_data.dart';
 import '../utils/platform_case.dart';
-import '../widgets/warning.dart';
-import 'login.dart';
-import 'profile_setting.dart';
+import '../widgets/warning_pop_up.dart';
+import 'my_login_page.dart';
+import 'profile_and_setting.dart';
 
 List<String>? courseIds;
 
@@ -189,8 +189,8 @@ class _LandingPageState extends State<LandingPage> {
                   for (var id in courseIds ?? []) {
                     Provider.of<CourseAppActifity>(context)
                         .upDateSelectingCourseData(id);
-                    Provider.of<Userdata>(context, listen: false)
-                        .setCourseIds(id);
+                    // Provider.of<Userdata>(context, listen: false)
+                    //     .setCourseIds(id);
                   }
                 }
               });

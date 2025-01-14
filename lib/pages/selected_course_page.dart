@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../data/model/materi_from_api.dart';
+import 'package:ngoding_cuy/provider/user_data.dart';
+import '../data/model/materi_ngoding_cuy.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/course_activity.dart';
-import '../widgets/loading.dart';
-import 'learning.dart';
+import '../widgets/costum_loading.dart';
+import 'learning_page.dart';
 
 class SelectedCoursePage extends StatefulWidget {
   static const routeName = "/selectionCourse";
@@ -22,7 +22,7 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    List<CourseName>? courseName =
+    List<CourseName> courseName =
         Provider.of<CourseAppActifity>(context).getSelectedCourseData;
     return Scaffold(
       backgroundColor: Colors.grey[200],
@@ -40,9 +40,18 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
                 separatorBuilder: (context, index) =>
                     const SizedBox(height: 10),
                 itemBuilder: (context, index) {
-                  List<Module>? courseContent =
+                  // seluruh sub bab yang tersedia
+                  List<Module> courseContent =
                       Provider.of<CourseAppActifity>(context)
                           .getCourseContent();
+                  // sub bab yang sudah diselesaikan
+                  Set<String> courseIds =
+                      Provider.of<Userdata>(context).courseIds ??
+                          {}[courseName[index].id] ??
+                          <String>{};
+                  // skor dari sub bab
+                  double step = courseIds.length / courseContent.length * 100;
+                  // //
                   final isExpanded = expandedIndex == index;
                   return GestureDetector(
                     onTap: () {
@@ -103,20 +112,13 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
                                         ),
                                       ],
                                     ),
-                                    const Text(
-                                      "Score 10000",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
                                   ],
                                 ),
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const MyBarProgresor(
-                                  step: 100,
+                                MyBarProgresor(
+                                  step: step.toInt(),
                                 ),
                               ],
                             ),

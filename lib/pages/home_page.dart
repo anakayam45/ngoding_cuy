@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/pages/news_page.dart';
+import 'package:ngoding_cuy/pages/my_news_page.dart';
 
-import 'package:ngoding_cuy/widgets/news_list_tile.dart';
+import 'package:ngoding_cuy/widgets/my_news_catalog.dart';
 import 'package:provider/provider.dart';
 
-import '../data/model/materi_from_api.dart';
+import '../data/model/materi_ngoding_cuy.dart';
 import '../provider/course_activity.dart';
 import '../widgets/course_grid_tile.dart';
 
@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           itemCount: coursename.length,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.all(8),
-                            child: MyCourse(
+                            child: CourseGridTile(
                               course: coursename[index],
                             ),
                           ),

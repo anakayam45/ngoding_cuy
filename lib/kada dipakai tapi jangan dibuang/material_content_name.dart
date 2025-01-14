@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/pages/learning.dart';
+import 'package:ngoding_cuy/pages/learning_page.dart';
 import 'package:provider/provider.dart';
 
-import '../data/model/materi_from_api.dart';
+import '../data/model/materi_ngoding_cuy.dart';
 import '../provider/course_activity.dart';
 
 class MaterialContentName extends StatelessWidget {

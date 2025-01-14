@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
-import 'package:ngoding_cuy/provider/course_activity.dart';
+import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/course_activity.dart';
 
 class MyNewspage extends StatelessWidget {
   static String routename = "/newsPage";

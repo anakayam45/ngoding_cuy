@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
-import 'package:ngoding_cuy/widgets/popup_alert_dialog.dart';
+import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
+import 'package:ngoding_cuy/widgets/alert_for_select_course.dart';
 
-class MyCourse extends StatelessWidget {
+class CourseGridTile extends StatelessWidget {
   final CourseName course;
-  const MyCourse({super.key, required this.course});
+  const CourseGridTile({super.key, required this.course});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class MyCourse extends StatelessWidget {
         onTap: () {
           showDialog(
               context: context,
-              builder: (context) => MyPopUp(
+              builder: (context) => AlertForSelectCourse(
                     course: course,
                   ));
         },

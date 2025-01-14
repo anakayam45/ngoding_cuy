@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/pages/question.dart';
 
-import '../data/model/materi_from_api.dart';
+import '../data/model/materi_ngoding_cuy.dart';
 
 Widget seleksi(BuildContext context, ModuleContent content) {
   print(content.type);
@@ -67,12 +66,4 @@ Widget imageFromNetwork(BuildContext context, ModuleContent? content) {
       },
     ),
   );
-}
-
-Widget buttonToTest(BuildContext context) {
-  return TextButton(
-      onPressed: () {
-        Navigator.pushReplacementNamed(context, QuestionPage.routeName);
-      },
-      child: const Text("Kerjakan Soal"));
 }

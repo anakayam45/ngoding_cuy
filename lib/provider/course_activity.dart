@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
+import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
 
 class CourseAppActifity extends ChangeNotifier {
   // model dasar > status, data

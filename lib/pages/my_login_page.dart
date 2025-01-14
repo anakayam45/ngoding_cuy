@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/api/service_api.dart';
-import 'package:ngoding_cuy/pages/starting.dart';
+import 'package:ngoding_cuy/pages/landing_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

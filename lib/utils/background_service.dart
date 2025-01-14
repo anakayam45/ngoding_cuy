@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'notification_settings.dart';
 
-import '../main.dart';
+import '../jamal.dart';
 
 final ReceivePort port = ReceivePort();
 

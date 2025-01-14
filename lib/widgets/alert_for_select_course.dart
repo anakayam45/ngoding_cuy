@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:ngoding_cuy/data/model/materi_from_api.dart';
-import 'package:ngoding_cuy/provider/course_activity.dart';
-import 'package:ngoding_cuy/provider/user_data.dart';
+import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
 import 'package:provider/provider.dart';
 
-class MyPopUp extends StatefulWidget {
+import '../provider/course_activity.dart';
+
+class AlertForSelectCourse extends StatefulWidget {
   final CourseName course;
-  const MyPopUp({super.key, required this.course});
+  const AlertForSelectCourse({super.key, required this.course});
 
   @override
-  State<MyPopUp> createState() => _MyPopUpState();
+  State<AlertForSelectCourse> createState() => AlertForSelectCourseState();
 }
 
-class _MyPopUpState extends State<MyPopUp> {
+class AlertForSelectCourseState extends State<AlertForSelectCourse> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -75,8 +75,6 @@ class _MyPopUpState extends State<MyPopUp> {
                 Provider.of<CourseAppActifity>(context, listen: false)
                     .upDateSelectingCourseData(
                         widget.course.id); // mengubah selected jadi true
-                Provider.of<Userdata>(context, listen: false)
-                    .setCourseIds(widget.course.id);
 
                 Provider.of<CourseAppActifity>(context, listen: false)
                     .setCourseNameState(
