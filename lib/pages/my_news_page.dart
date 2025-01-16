@@ -6,32 +6,42 @@ import '../provider/course_activity.dart';
 
 class MyNewspage extends StatelessWidget {
   static String routename = "/newsPage";
-  const MyNewspage({super.key});
+  const MyNewspage(BuildContext context, {super.key});
 
   @override
   Widget build(BuildContext context) {
     News? news = Provider.of<CourseAppActifity>(context).newsSate;
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            child: Image.network(
-              news!.image,
-              fit: BoxFit.fitWidth,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(news!.title),
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              child: Image.network(
+                news.image,
+                fit: BoxFit.fitWidth,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              news.description,
-              style: const TextStyle(color: Colors.black),
-            ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  news.description,
+                  style: const TextStyle(color: Colors.black),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

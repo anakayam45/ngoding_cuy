@@ -56,14 +56,14 @@ class MyApp extends StatelessWidget {
       theme: MyAppTheme.lightTheme,
       initialRoute: LandingPage.routeName,
       routes: {
-        LandingPage.routeName: (context) => const LandingPage(),
-        HomePage.routeName: (context) => const HomePage(),
-        QuestionPage.routeName: (context) => const QuestionPage(),
-        ProfilePage.routeName: (context) => const ProfilePage(),
-        SelectedCoursePage.routeName: (context) => const SelectedCoursePage(),
-        LearningPage.routeName: (context) => const LearningPage(),
-        MyNewspage.routename: (context) => const MyNewspage(),
-        MyLoginPage.routeName: (context) => const MyLoginPage()
+        LandingPage.routeName: (_) => LandingPage(context),
+        HomePage.routeName: (_) => HomePage(context),
+        QuestionPage.routeName: (_) => QuestionPage(context),
+        ProfilePage.routeName: (_) => ProfilePage(context),
+        SelectedCoursePage.routeName: (_) => SelectedCoursePage(context),
+        LearningPage.routeName: (_) => LearningPage(context),
+        MyNewspage.routename: (_) => MyNewspage(context),
+        MyLoginPage.routeName: (_) => MyLoginPage(context)
       },
     );
   }

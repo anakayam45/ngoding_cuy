@@ -43,7 +43,6 @@ class CourseAppActifity extends ChangeNotifier {
     return [];
   } // output => [Course1, Course2, ...] dipakai home page
   // nama course yang dari api
-
 //
 
 //

@@ -42,14 +42,24 @@ Widget myHeading(BuildContext context, ModuleContent? content) {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: Text(
         content!.content,
-        style: Theme.of(context).textTheme.displayLarge,
+        style: Theme.of(context)
+            .textTheme
+            .displayLarge!
+            .copyWith(color: Colors.black87),
       ),
     ),
   );
 }
 
 Widget myParagraph(BuildContext context, ModuleContent? content) {
-  return Text(content!.content, style: Theme.of(context).textTheme.labelSmall);
+  return Text(
+    content!.content,
+    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+          color: Colors.black87,
+          fontSize: 15,
+          fontFamily: "Consolas",
+        ),
+  );
 }
 
 Widget imageFromNetwork(BuildContext context, ModuleContent? content) {

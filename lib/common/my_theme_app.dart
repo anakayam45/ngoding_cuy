@@ -16,19 +16,20 @@ class MyAppTheme {
       primary: Color(0xFF1DCFF8),
       secondary: Color(0xFFF3D3D1),
     ),
-    scaffoldBackgroundColor: const Color(0xFFF3D3D1),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFF008080),
-    ),
+    scaffoldBackgroundColor: const Color(0xFF1DCFF8),
+    appBarTheme: const AppBarTheme(),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.montserrat(
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w500,
       ),
       titleMedium: GoogleFonts.openSans(
+        color: Colors.white,
         fontWeight: FontWeight.w500,
       ),
-      labelSmall: GoogleFonts.roboto(),
+      labelSmall: GoogleFonts.roboto(
+        color: Colors.white,
+      ),
     ),
   );
 }

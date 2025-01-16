@@ -60,7 +60,7 @@ class _WarningPopUpState extends State<WarningPopUp> {
                       flex: 2,
                       child: TextButton(
                         onPressed: () {
-                          widget.onPressed;
+                          Navigator.pop(context);
                         },
                         child: const Text("OK"),
                       ),

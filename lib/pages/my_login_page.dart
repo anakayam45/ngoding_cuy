@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/api/service_api.dart';
-import 'package:ngoding_cuy/pages/landing_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,7 +8,7 @@ import '../widgets/my_widget.dart';
 
 class MyLoginPage extends StatefulWidget {
   static const routeName = "/login";
-  const MyLoginPage({super.key});
+  const MyLoginPage(BuildContext context, {super.key});
 
   @override
   State<MyLoginPage> createState() => _MyLoginPageState();
@@ -65,7 +64,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
                               child: CircleAvatar(
                                 radius: 90,
                                 child: Image.network(
-                                  "src",
+                                  "https://ngoding.ayam45.shop/image.php?name=IMG-20250114-WA0043.jpg",
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -91,20 +90,20 @@ class _MyLoginPageState extends State<MyLoginPage> {
                                   try {
                                     SharedPreferences prefs =
                                         await SharedPreferences.getInstance();
-                                    Map<String, dynamic> result =
-                                        await ApiService().login(
-                                            _emailLogin.text,
-                                            _passwordLogin.text);
-                                    print(result);
-                                    if (context.mounted) {
-                                      prefs.setString("username",
-                                          result["data"]["userName"]);
-                                      Provider.of<Userdata>(context,
-                                              listen: false)
-                                          .setName(result["data"]["userName"]);
-                                      Navigator.pushReplacementNamed(
-                                          context, LandingPage.routeName);
-                                    }
+                                    await ApiService()
+                                        .login(_emailLogin.text,
+                                            _passwordLogin.text)
+                                        .then((result) {
+                                      if (context.mounted) {
+                                        prefs.setString("username",
+                                            result["data"]["userName"]);
+                                        Provider.of<Userdata>(context,
+                                                listen: false)
+                                            .setName(
+                                                result["data"]["userName"]);
+                                        Navigator.pop(context);
+                                      }
+                                    });
                                   } catch (e) {
                                     print("Gagal login $e");
                                   }

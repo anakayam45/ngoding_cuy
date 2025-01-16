@@ -3,8 +3,10 @@ import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
 import 'package:ngoding_cuy/widgets/alert_for_select_course.dart';
 
 class CourseGridTile extends StatelessWidget {
+  final BuildContext context;
   final CourseName course;
-  const CourseGridTile({super.key, required this.course});
+  const CourseGridTile(
+      {super.key, required this.course, required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,10 @@ class CourseGridTile extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   child: Text(
                     course.name,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: Colors.deepOrange),
                   ),
                 ),
                 const Spacer(),

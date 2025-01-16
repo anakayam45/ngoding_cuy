@@ -13,25 +13,24 @@ import '../provider/course_activity.dart';
 import '../provider/user_data.dart';
 import '../utils/platform_case.dart';
 import '../widgets/warning_pop_up.dart';
-import 'my_login_page.dart';
 import 'profile_and_setting.dart';
 
 List<String>? courseIds;
 
 class LandingPage extends StatefulWidget {
   static const routeName = "/";
-  const LandingPage({super.key});
+  const LandingPage(BuildContext context, {super.key});
 
   @override
   State<LandingPage> createState() => _LandingPageState();
 }
 
 class _LandingPageState extends State<LandingPage> {
-  final List<Widget> pages = [
-    const HomePage(),
-    const SelectedCoursePage(),
-    const ProfilePage(),
-  ];
+  List<Widget> pages(context) => [
+        HomePage(context),
+        SelectedCoursePage(context),
+        ProfilePage(context),
+      ];
 
   final List<BottomNavigationBarItem> pageIcon = [
     BottomNavigationBarItem(
@@ -121,7 +120,7 @@ class _LandingPageState extends State<LandingPage> {
         onTap: onClick,
       ),
       tabBuilder: (BuildContext context, int index) {
-        return pages[index];
+        return pages(context)[index];
       },
     );
   }
@@ -132,11 +131,19 @@ class _LandingPageState extends State<LandingPage> {
     List<AppBar> appBars = [
       buildHomeAppBar(name, myScore),
       AppBar(
-        title: const Text("My learning path"),
+        title: Text("My learning path",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Colors.white)),
         backgroundColor: Colors.transparent,
       ),
       AppBar(
-        title: const Text("Settings"),
+        title: Text("Settings",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Colors.white)),
         backgroundColor: Colors.transparent,
       ),
     ];
@@ -144,7 +151,7 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF1DCFF8),
       appBar: appBars[pageIndex],
-      body: pages[pageIndex],
+      body: pages(context)[pageIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: pageIcon,
         onTap: onClick,
@@ -157,64 +164,59 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userData = Provider.of<Userdata>(context, listen: false).name;
-    if (userData!.isEmpty) {
-      return const MyLoginPage();
-    } else {
-      return FutureBuilder<NgodingCuy>(
-        future: ngoding,
-        builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Material(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return Material(
-                color: Colors.grey,
-                child: WarningPopUp(
-                    title: snapshot.error.toString(),
-                    onPressed: () => Restart.restartApp(
-                          notificationTitle: "Restart Aja Bang",
-                          notificationBody: "Lorem Ipsum Dolorsit amet!",
-                        )),
-              );
-            } else if (snapshot.hasData && snapshot.data != null) {
-              WidgetsBinding.instance.addPostFrameCallback((_) async {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                List<String>? courseIds = prefs.getStringList("courseId");
-                if (context.mounted) {
-                  for (var id in courseIds ?? []) {
-                    Provider.of<CourseAppActifity>(context)
-                        .upDateSelectingCourseData(id);
-                    // Provider.of<Userdata>(context, listen: false)
-                    //     .setCourseIds(id);
-                  }
-                }
-              });
-              Provider.of<CourseAppActifity>(context, listen: false)
-                  .addCourse(snapshot.data!);
-              return PlatformWidget(
-                androidBuilder: buildAndro,
-                iosBuilder: buildIos,
-              );
-            } else {
-              return WarningPopUp(
-                  title: "Data tidak ada",
+    return FutureBuilder<NgodingCuy>(
+      future: ngoding,
+      builder: (context, AsyncSnapshot<NgodingCuy> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Material(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return Material(
+              color: Colors.grey,
+              child: WarningPopUp(
+                  title: snapshot.error.toString(),
                   onPressed: () => Restart.restartApp(
                         notificationTitle: "Restart Aja Bang",
                         notificationBody: "Lorem Ipsum Dolorsit amet!",
-                      ));
-            }
-          } else {
-            return const WarningPopUp(
-              title: "Data tidak ada",
+                      )),
             );
+          } else if (snapshot.hasData && snapshot.data != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              List<String>? courseIds = prefs.getStringList("courseId");
+              if (context.mounted) {
+                for (var id in courseIds ?? []) {
+                  Provider.of<CourseAppActifity>(context)
+                      .upDateSelectingCourseData(id);
+                  // Provider.of<Userdata>(context, listen: false)
+                  //     .setCourseIds(id);
+                }
+              }
+            });
+            Provider.of<CourseAppActifity>(context, listen: false)
+                .addCourse(snapshot.data!);
+            return PlatformWidget(
+              androidBuilder: buildAndro,
+              iosBuilder: buildIos,
+            );
+          } else {
+            return WarningPopUp(
+                title: "Data tidak ada",
+                onPressed: () => Restart.restartApp(
+                      notificationTitle: "Restart Aja Bang",
+                      notificationBody: "Lorem Ipsum Dolorsit amet!",
+                    ));
           }
-        },
-      );
-    }
+        } else {
+          return const WarningPopUp(
+            title: "Data tidak ada",
+          );
+        }
+      },
+    );
   }
 }

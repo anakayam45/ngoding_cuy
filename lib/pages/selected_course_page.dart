@@ -8,7 +8,7 @@ import 'learning_page.dart';
 
 class SelectedCoursePage extends StatefulWidget {
   static const routeName = "/selectionCourse";
-  const SelectedCoursePage({super.key});
+  const SelectedCoursePage(BuildContext context, {super.key});
 
   @override
   State<SelectedCoursePage> createState() => _SelectedCoursePageState();
@@ -27,11 +27,12 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: courseName.isEmpty
-          ? const Center(
-              child: Text(
-                "Belum ada latihan yang dipilih",
-                style: TextStyle(color: Colors.black),
-              ),
+          ? Center(
+              child: Text("Belum ada latihan yang dipilih",
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(color: Colors.grey)),
             )
           : Padding(
               padding: const EdgeInsets.only(top: 12),
@@ -129,7 +130,7 @@ class _SelectedCoursePageState extends State<SelectedCoursePage> {
                           curve: Curves.easeInOut,
                           width: screenWidth * .8,
                           height: isExpanded
-                              ? screenHeight * .1 * (courseContent.length / 1.5)
+                              ? screenHeight * .1 * (courseContent.length / 1.3)
                               : 0,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(

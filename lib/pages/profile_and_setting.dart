@@ -7,7 +7,7 @@ import '../utils/notification_settings.dart';
 
 class ProfilePage extends StatefulWidget {
   static const routeName = "profile";
-  const ProfilePage({super.key});
+  const ProfilePage(BuildContext context, {super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Container(
-                color: const Color.fromARGB(255, 255, 255, 255),
+                color: Colors.white,
                 child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: ListView(children: const [

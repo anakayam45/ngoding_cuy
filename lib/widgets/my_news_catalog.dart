@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ngoding_cuy/data/model/materi_ngoding_cuy.dart';
 
 class MyNewsCatalog extends StatelessWidget {
+  final BuildContext context;
   final News news;
-  const MyNewsCatalog({super.key, required this.news});
+  const MyNewsCatalog({super.key, required this.news, required this.context});
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +50,21 @@ class MyNewsCatalog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(news.title,
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      Text(
-                        news.description,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headlineSmall,
+                          style:
+                              Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                      SizedBox(
+                        width: 300,
+                        child: Text(
+                          news.description,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: Colors.greenAccent),
+                        ),
                       )
                     ],
                   ),
